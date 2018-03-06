@@ -80,14 +80,14 @@
         <item idx="77" size="1 1" type="char">海</item>
         <item idx="78" size="1 1" type="char">贵</item>
         <item idx="79" size="1 1" type="char">陕</item>
-        <item idx="80" size="1 1" type="char">澳</item>
-        <item idx="81" size="1 1" type="char">闽</item>
-        <item idx="82" size="1 1" type="char">广</item>
-        <item idx="83" size="1 1" type="char">特</item>
-        <item idx="84" size="1 1" type="char">应</item>
-        <item idx="85" size="1 1" type="char">急</item>
-        <item idx="86" size="1 1" type="char">使</item>
-        <item idx="87" size="1 1" type="char">领</item>
-        <item idx="88" size="1 1" type="char">试</item>
+        <!--<item idx="80" size="1 1" type="char">澳</item>-->
+        <!--<item idx="81" size="1 1" type="char">闽</item>-->
+        <!--<item idx="82" size="1 1" type="char">广</item>-->
+        <!--<item idx="83" size="1 1" type="char">特</item>-->
+        <!--<item idx="84" size="1 1" type="char">应</item>-->
+        <!--<item idx="85" size="1 1" type="char">急</item>-->
+        <!--<item idx="86" size="1 1" type="char">使</item>-->
+        <!--<item idx="87" size="1 1" type="char">领</item>-->
+        <!--<item idx="88" size="1 1" type="char">试</item>-->
     </root>
 </xml>
