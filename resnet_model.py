@@ -6,7 +6,8 @@ import six
 
 from tensorflow.python.training import moving_averages
 
-HParams = namedtuple('HParams', 'batch_size, num_classes, '
+HParams = namedtuple('HParams',
+                     'batch_size, num_classes, num_digit,'
                      'num_residual_units, use_bottleneck, '
                      'relu_leakiness, weight_decay_rate')
 
@@ -80,7 +81,7 @@ class ResNet(object):
 
         # fc + Softmax
         with tf.variable_scope('logit'):
-            self.out = self._fully_connected(x, self.hps.num_classes)
+            self.out = self._fully_connected(x, self.hps.num_classes * self.hps.num_digit)
             # self.out = tf.nn.softmax(logits)
 
     # transform step to tf.nn.conv2d needed
@@ -260,7 +261,7 @@ class ResNet(object):
         return tf.where(tf.less(x, 0.0), leakiness * x, x, name='leaky_relu')
 
     # fc layer
-    def _fully_connected(self, x, out_dim):
+    def _fully_connected(self, x, out_dim, name='fc'):
         # transform to 2D tensor, size:[N, -1]
         # x = tf.reshape(x, [self.hps.batch_size, -1])
         # param: w, avg random init, [-sqrt(3/dim), sqrt(3/dim)]*factor
@@ -269,7 +270,7 @@ class ResNet(object):
         # parm: b, 0 init
         b = tf.get_variable('biases', [out_dim], initializer=tf.constant_initializer())
         # x * w + b
-        return tf.nn.xw_plus_b(x, w, b)
+        return tf.nn.xw_plus_b(x, w, b, name=name)
 
     # global ang pool
     def _global_avg_pool(self, x):

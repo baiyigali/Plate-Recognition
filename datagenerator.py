@@ -2,15 +2,17 @@
 import numpy as np
 import cv2
 import os
+import data_process.read_xml as rx
 
 
 class ImageDataGenerator:
     def __init__(self, class_list, horizontal_flip=False, shuffle=False,
-                 mean=np.array([127.5, 127.5, 127.5]), scale_size=(227, 227), nb_classes=2):#mean=np.array([127.5]),np.array(,,)
+                 mean=np.array([127.5, 127.5, 127.5]), scale_size=(227, 227), num_digit=8, num_classes=2):#mean=np.array([127.5]),np.array(,,)
 
         # Init params
         self.horizontal_flip = horizontal_flip
-        self.n_classes = nb_classes
+        self.n_digit = num_digit
+        self.n_classes = num_classes
         self.shuffle = shuffle
         self.mean = mean
         self.scale_size = scale_size
@@ -32,7 +34,7 @@ class ImageDataGenerator:
             for l in lines:
                 items = l.split()
                 self.images.append(items[0])
-                self.labels.append(int(items[1]))
+                self.labels.append(items[1])
 
             # store total number of data
             self.data_size = len(self.labels)
@@ -88,7 +90,7 @@ class ImageDataGenerator:
 
             # rescale image
             try:
-                img = cv2.resize(img, (self.scale_size[0], self.scale_size[0]))
+                img = cv2.resize(img, (self.scale_size[1], self.scale_size[0]))
             except:
                 print(paths[i])
             img = img.astype(np.float32)
@@ -98,10 +100,23 @@ class ImageDataGenerator:
 
             images[i] = img
 
-        # Expand labels to one hot encoding
-        one_hot_labels = np.zeros((batch_size, self.n_classes))
+        # 返回label矩阵
+        # one_hot_labels = np.zeros((batch_size, self.n_digit, self.n_classes))
+        # for i in range(len(labels)):
+        #     one_hot_labels[i][labels[i]] = 1
+
+        one_hot_labels = np.zeros((batch_size, self.n_digit, self.n_classes))
+        read_x = rx.read_xml(batch_size=batch_size, num_digit=self.n_digit, num_classes=self.n_classes)
+        label_dict, _ = read_x.read_file('./data_process/label_name.xml')
         for i in range(len(labels)):
-            one_hot_labels[i][labels[i]] = 1
+            m = read_x.plate2label(labels[i], label_dict)
+            one_hot_labels[i] = m[0]
 
         # return array of images and labels
         return images, one_hot_labels
+
+# read_x = rx.read_xml(batch_size=32, num_digit=8, num_classes=82)
+# label_dict, _ = read_x.read_file('./data_process/label_name.xml')
+# print(label_dict)
+# train = ImageDataGenerator('./path/train.txt', scale_size=(100, 30), num_digit=8, num_classes=82)
+# x = train.next_batch(32)

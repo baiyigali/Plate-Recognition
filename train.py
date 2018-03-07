@@ -2,7 +2,6 @@
 
 import os
 import sys
-
 sys.path.append("..")
 sys.path.append("../..")
 import time
@@ -12,12 +11,13 @@ from datetime import datetime
 import resnet_model
 from datagenerator import ImageDataGenerator
 from utils import mkdirs
-from sklearn.metrics import confusion_matrix, f1_score, recall_score, classification_report
+from sklearn.metrics import confusion_matrix
+
 
 class ResNet_train():
     def __init__(self, image_size, num_epoch, batch_size, learning_rate,
-                 weight_decay, num_digit, num_classes, train_file, val_file, filewriter_path, checkpoint_path,
-                 num_residual_units, relu_leakiness=0.1, is_bottleneck=True, is_restore=True):
+                 weight_decay, num_digit, num_classes, train_file, valid_file, filewriter_path, checkpoint_path,
+                 num_residual_units, relu_leakiness=0.1, is_bottleneck=True, is_restore=True, device_id='2'):
         self.image_size = image_size
         self.num_epoch = num_epoch
         self.batch_size = batch_size
@@ -27,7 +27,7 @@ class ResNet_train():
         self.num_classes = num_classes
         self.display_step = 20
         self.train_file = train_file
-        self.val_file = val_file
+        self.valid_file = valid_file
         self.filewriter_path = filewriter_path
         mkdirs(self.filewriter_path)
         self.checkpoint_path = checkpoint_path
@@ -41,26 +41,33 @@ class ResNet_train():
         else:
             self.restore_checkpoint = ''
 
-        self.x = tf.placeholder(tf.float32, [None, self.image_size[0], self.image_size[1], 3], name='input')
-        self.y = tf.placeholder(tf.float32, [None, self.num_digit, self.num_classes])
+        os.environ['CUDA_VISIBLE_DEVICES'] = device_id
 
     def init_model(self):
+        self.x = tf.placeholder(tf.float32, [None, self.image_size[0], self.image_size[1], 3], name='input')
+        self.y = tf.placeholder(tf.float32, [None, self.num_digit, self.num_classes])
         hps = resnet_model.HParams(batch_size=self.batch_size,
                                    num_classes=self.num_classes,
+                                   num_digit=self.num_digit,
                                    num_residual_units=self.num_residual_units,
                                    use_bottleneck=self.is_bottlneck,
                                    relu_leakiness=self.relu_leakiness,
                                    weight_decay_rate=self.weight_decay)
         self.model = resnet_model.ResNet(hps, self.x, self.y)
-        predict = self.model.out
-        self.output = tf.nn.softmax(predict, name='output')
+        self.output = self.model.out
+        # predict = self.model.out
+        # self.output = tf.nn.softmax(predict, name='output')
 
     def set_cost_function(self):
         self.var_list = [v for v in tf.trainable_variables()]
+        self.output = tf.reshape(self.output, [self.batch_size, self.num_digit, self.num_classes])
         with tf.name_scope("cross_ent"):
-            self.cost = tf.reduce_mean(
-                tf.nn.softmax_cross_entropy_with_logits(logits=self.output, labels=self.y))
-            self.cost += self.model._decay()
+            class_delta = self.output - self.y
+            self.cost = tf.reduce_mean(tf.reduce_sum(tf.square(class_delta), axis=2))
+            # self.cost = tf.reduce_mean(
+            #     tf.nn.softmax_cross_entropy_with_logits(logits=self.output, labels=self.y))
+            # self.cost += self.model._decay()
+
         # Train op
         with tf.name_scope("train"):
             # Get gradients of all trainable variables
@@ -75,7 +82,7 @@ class ResNet_train():
     def get_accuray(self):
         # Evaluation op: Accuracy of the model
         with tf.name_scope("accuracy"):
-            prediction = tf.equal(tf.argmax(self.output, 1), tf.argmax(self.y, 1))
+            prediction = tf.equal(tf.argmax(self.output, 2), tf.argmax(self.y, 2))
             self.accuracy = tf.reduce_mean(tf.cast(prediction, tf.float32))
 
     def set_summary(self):
@@ -99,6 +106,12 @@ class ResNet_train():
     def init_saver(self):
         self.saver = tf.train.Saver()
 
+    def create_date(self):
+        return ImageDataGenerator(self.train_file, scale_size=self.image_size, num_digit=self.num_digit,
+                                  num_classes=self.num_classes), \
+               ImageDataGenerator(self.valid_file, scale_size=self.image_size, num_digit=self.num_digit,
+                                  num_classes=self.num_classes)
+
     def fit(self):
         self.init_model()
         self.set_cost_function()
@@ -106,10 +119,7 @@ class ResNet_train():
         self.set_summary()
         self.init_saver()
 
-        train_generator = ImageDataGenerator(self.train_file, scale_size=self.image_size,
-                                             nb_classes=self.num_classes)
-        val_generator = ImageDataGenerator(self.val_file, scale_size=self.image_size,
-                                           nb_classes=self.num_classes)
+        train_generator, val_generator = self.create_date()
 
         # Get the number of training/validation steps per epoch
         train_batches_per_epoch = np.floor(train_generator.data_size / self.batch_size).astype(np.int16)
@@ -171,23 +181,23 @@ class ResNet_train():
                     v_acc += valid_acc
                     count += 1
 
-                    y_true = np.argmax(batch_validy, 1)
-                    y_pre = np.argmax(valid_out, 1)
-                    for k in range(self.batch_size):
-                        if not (y_pre[k] == 0 or y_pre[k] == 1):
-                            y_pre[k] = 0
-
-                    if i == 0:
-                        conf_matrix = confusion_matrix(y_true, y_pre)
-                    else:
-                        conf_matrix += confusion_matrix(y_true, y_pre)
-                    # print(i, conf_matrix)
+                    # y_true = np.argmax(batch_validy, 1)
+                    # y_pre = np.argmax(valid_out, 1)
+                    # for k in range(self.batch_size):
+                    #     if not (y_pre[k] == 0 or y_pre[k] == 1):
+                    #         y_pre[k] = 0
+                    #
+                    # if i == 0:
+                    #     conf_matrix = confusion_matrix(y_true, y_pre)
+                    # else:
+                    #     conf_matrix += confusion_matrix(y_true, y_pre)
+                    #     # print(i, conf_matrix)
                 v_loss /= count
                 v_acc /= count
                 t2 = time.time() - t1
                 print("Validation loss = {:.4f}, acc = {:.4f}".format(v_loss, v_acc))
                 print("Test image {:.4f}ms per image".format(t2 * 1000 / (val_batches_per_epoch * self.batch_size)))
-                print(conf_matrix)
+                # print(conf_matrix)
 
                 # Reset the file pointer of the image data generator
                 val_generator.reset_pointer()
@@ -203,18 +213,41 @@ class ResNet_train():
 
 
 rt = ResNet_train(image_size=(100, 30),
-                  num_epoch=100,
-                  batch_size=32,
-                  learning_rate=0.0001,
+                  num_epoch=80,
+                  batch_size=64,
+                  learning_rate=0.01,
                   weight_decay=0.0002,
-                  num_classes=2,
-                  train_file="path/mnist/train.txt",
-                  val_file="path/mnist/valid.txt",
-                  filewriter_path = "tmp/resnet13_64/tensorboard",
-                  checkpoint_path = "tmp/resnet13_64/checkpoints",
-                  num_residual_units=1,
+                  num_digit=8,
+                  num_classes=82,
+                  train_file="./path/train.txt",
+                  valid_file="./path/valid.txt",
+                  filewriter_path="./tmp/resnet13/tensorboard",
+                  checkpoint_path="./tmp/resnet13/checkpoints",
+                  num_residual_units=2,
                   relu_leakiness=0.1,
                   is_bottleneck=True,
-                  is_restore=False
+                  is_restore=False,
+                  device_id='0'
                   )
+
+rt.fit()
+
+rt = ResNet_train(image_size=(100, 30),
+                  num_epoch=100,
+                  batch_size=64,
+                  learning_rate=0.001,
+                  weight_decay=0.0002,
+                  num_digit=8,
+                  num_classes=82,
+                  train_file="./path/train.txt",
+                  valid_file="./path/valid.txt",
+                  filewriter_path="./tmp/resnet13/tensorboard",
+                  checkpoint_path="./tmp/resnet13/checkpoints",
+                  num_residual_units=2,
+                  relu_leakiness=0.1,
+                  is_bottleneck=True,
+                  is_restore=False,
+                  device_id='0'
+                  )
+
 rt.fit()
