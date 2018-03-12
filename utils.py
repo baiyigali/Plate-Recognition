@@ -2,12 +2,16 @@ import os
 import matplotlib.pyplot as plt
 import numpy as np
 import itertools
+import shutil
 
 
 def mkdirs(path):
     if not os.path.exists(path):
         os.makedirs(path)
 
+def deldirs(path):
+    if os.path.exists(path):
+        shutil.rmtree(path)
 
 def plot_confusion_matrix(cm, classes,
                           normalize=False,
