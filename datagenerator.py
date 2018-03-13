@@ -109,7 +109,7 @@ class ImageDataGenerator:
         read_x = rx.read_xml(batch_size=batch_size, num_digit=self.n_digit, num_classes=self.n_classes)
         label_dict, _ = read_x.read_file('./data_process/label_name.xml')
         for i in range(len(labels)):
-            m = read_x.plate2label(labels[i], label_dict)
+            m = read_x.plate2label(labels[i])
             one_hot_labels[i] = m[0]
 
         # return array of images and labels

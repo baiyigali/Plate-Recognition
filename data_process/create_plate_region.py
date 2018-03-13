@@ -4,6 +4,7 @@ import cv2
 import os
 import concurrent.futures
 
+
 # 创建车牌位置的标签数据集
 class create_region():
     def __init__(self):
@@ -21,8 +22,6 @@ class create_region():
         image_h, image_w, _ = image.shape
         plate_h, plate_w, _ = plate.shape
         plate = cv2.resize(plate, (plate_h / 2., plate_w / 2.))
-
-
 
     def set_logo(self, bg_image, logo, coord):
         pose_letter_h, pose_letter_w, _ = logo.shape
@@ -50,8 +49,6 @@ class create_region():
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
-
-
 # def do(file_name):
 #     cr = create_region()
 #     folder = 'E:\\workspace\\github\\plate_dataset\\car_image'
@@ -74,4 +71,3 @@ class create_region():
 # with concurrent.futures.ThreadPoolExecutor(max_workers=8) as executor:
 #     for t in executor.map(do, image_files):
 #         print(t)
-

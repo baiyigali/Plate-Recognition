@@ -17,13 +17,12 @@ from sklearn.metrics import confusion_matrix
 
 class FCN_train():
     def __init__(self, image_size, num_epoch, batch_size, learning_rate,
-                 weight_decay, num_digit, num_classes, train_file, valid_file, filewriter_path, checkpoint_path,
+                 num_digit, num_classes, train_file, valid_file, filewriter_path, checkpoint_path,
                  num_residual_units, relu_leakiness=0.1, is_bottleneck=True, is_restore=True, device_id='2'):
         self.image_size = image_size
         self.num_epoch = num_epoch
         self.batch_size = batch_size
         self.learning_rate = learning_rate
-        self.weight_decay = weight_decay
         self.num_digit = num_digit
         self.num_classes = num_classes
         self.display_step = 20
@@ -49,7 +48,7 @@ class FCN_train():
         self.x = tf.placeholder(tf.float32, [None, self.image_size[0], self.image_size[1], 3], name='input')
         self.y = tf.placeholder(tf.float32, [None, self.num_digit, self.num_classes])
 
-        self.model = fcn_model.FCN(self.x, self.num_classes, self.weight_decay)
+        self.model = fcn_model.FCN(self.x, self.num_classes)
         # self.output = self.model.out
         # predict = self.model.out
         # self.output = tf.nn.softmax(predict, name='output')
@@ -254,9 +253,12 @@ class FCN_train():
                                       self.loss4, self.loss5, self.loss6, self.loss7,
                                       self.accuracy, self.merged_summary], feed_dict=feed_dict)
                         self.writer.add_summary(s, epoch * train_batches_per_epoch + step)
-                        print("Iter {}/{}, training mini-batch loss = {:.5f}, training accuracy = {:.5f}".format(
-                            step * self.batch_size, train_batches_per_epoch * self.batch_size,
-                            loss0, loss1, loss2, loss3, loss4, loss5, loss6, loss7, acc))
+                        print(
+                            "Iter {}/{}, training mini-batch loss0 = {:.4f}, loss1 = {:.4f}, "
+                            "loss2 = {:.4f}, loss3 = {:.4f}, loss4 = {:.4f}, loss5 = {:.4f}, "
+                            "loss6 = {:.4f},loss7 = {:.4f}, acc = {:.4f}".format(
+                                step * self.batch_size, train_batches_per_epoch * self.batch_size,
+                                loss0, loss1, loss2, loss3, loss4, loss5, loss6, loss7, acc))
                         val_generator.reset_pointer()
 
                     step += 1
@@ -317,6 +319,7 @@ class FCN_train():
                 v_loss7 /= count
                 v_acc /= count
                 t2 = time.time() - t1
+                tf.summary.scalar('valid_acc', v_acc)
                 print(
                     "Validation loss0 = {:.4f}, loss1 = {:.4f}, loss2 = {:.4f}, loss3 = {:.4f}, loss4 = {:.4f},"
                     "loss5 = {:.4f}, loss6 = {:.4f},loss7 = {:.4f}, acc = {:.4f}".format(
@@ -341,9 +344,8 @@ rt = FCN_train(image_size=(100, 30),
                num_epoch=800,
                batch_size=64,
                learning_rate=0.01,
-               weight_decay=0.0002,
                num_digit=8,
-               num_classes=82,
+               num_classes=34,  # max num classes
                train_file="./path/train.txt",
                valid_file="./path/valid.txt",
                filewriter_path="./tmp/fcn4/tensorboard",

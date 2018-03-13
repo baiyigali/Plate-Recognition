@@ -3,10 +3,9 @@ import numpy as np
 
 
 class FCN():
-    def __init__(self, images, num_classes, weight_decay):
+    def __init__(self, images, num_classes):
         self.images = images
         self.num_classes = num_classes
-        self.weight_decay = weight_decay
         self.network_model()
         pass
 
@@ -43,14 +42,22 @@ class FCN():
 
         with tf.variable_scope('logit'):
             flatten = self._fully_connected(x, 1024, name='fc')
-            self.fc0 = self._fully_connected(flatten, self.num_classes, name='fc0')
-            self.fc1 = self._fully_connected(flatten, self.num_classes, name='fc1')
-            self.fc2 = self._fully_connected(flatten, self.num_classes, name='fc2')
-            self.fc3 = self._fully_connected(flatten, self.num_classes, name='fc3')
-            self.fc4 = self._fully_connected(flatten, self.num_classes, name='fc4')
-            self.fc5 = self._fully_connected(flatten, self.num_classes, name='fc5')
-            self.fc6 = self._fully_connected(flatten, self.num_classes, name='fc6')
-            self.fc7 = self._fully_connected(flatten, self.num_classes, name='fc7')
+            fc0 = self._fully_connected(flatten, self.num_classes, name='fc0')
+            self.fc0 = tf.nn.softmax(fc0)
+            fc1 = self._fully_connected(flatten, self.num_classes, name='fc1')
+            self.fc1 = tf.nn.softmax(fc1)
+            fc2 = self._fully_connected(flatten, self.num_classes, name='fc2')
+            self.fc2 = tf.nn.softmax(fc2)
+            fc3 = self._fully_connected(flatten, self.num_classes, name='fc3')
+            self.fc3 = tf.nn.softmax(fc3)
+            fc4 = self._fully_connected(flatten, self.num_classes, name='fc4')
+            self.fc4 = tf.nn.softmax(fc4)
+            fc5 = self._fully_connected(flatten, self.num_classes, name='fc5')
+            self.fc5 = tf.nn.softmax(fc5)
+            fc6 = self._fully_connected(flatten, self.num_classes, name='fc6')
+            self.fc6 = tf.nn.softmax(fc6)
+            fc7 = self._fully_connected(flatten, self.num_classes, name='fc7')
+            self.fc7 = tf.nn.softmax(fc7)
             # fc = tf.concat([fc0, fc1, fc2, fc3, fc4, fc5, fc6, fc7], axis=1)
             # self.out = tf.nn.softmax(fc, name='output')
 
@@ -84,13 +91,3 @@ class FCN():
     def _stride_arr(self, stride):
         return [1, stride, stride, 1]
 
-        # weight decay, L2 regular loss
-    def _decay(self):
-        costs = []
-        # ergodic all trainable variables
-        for var in tf.trainable_variables():
-            # only compute DW variable
-            if var.op.name.find(r'DW') > 0:
-                costs.append(tf.nn.l2_loss(var))
-        #
-        return tf.multiply(self.weight_decay, tf.add_n(costs))

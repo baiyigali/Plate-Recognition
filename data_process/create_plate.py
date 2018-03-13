@@ -8,59 +8,58 @@ import itertools
 import numpy as np
 import shutil
 
-NUMBER_PATH = ['./image/0（合并）.png', './image/1（合并）.png', './image/2（合并）.png', './image/3（合并）.png',
-               './image/4（合并）.png', './image/5（合并）.png', './image/6（合并）.png', './image/7（合并）.png',
-               './image/8（合并）.png', './image/9（合并）.png', ]
+NUMBER_PATH = ['../image/0（合并）.png', '../image/1（合并）.png', '../image/2（合并）.png', '../image/3（合并）.png',
+               '../image/4（合并）.png', '../image/5（合并）.png', '../image/6（合并）.png', '../image/7（合并）.png',
+               '../image/8（合并）.png', '../image/9（合并）.png', ]
 
 LETTER_PATH = [
-    './image/A（合并）.png', './image/B（合并）.png', './image/C（合并）.png',
-    './image/D（合并）.png', './image/E（合并）.png', './image/F（合并）.png',
-    './image/G（合并）.png', './image/H（合并）.png', './image/J（合并）.png',
-    './image/K（合并）.png', './image/L（合并）.png', './image/M（合并）.png',
-    './image/N（合并）.png', './image/P（合并）.png', './image/Q（合并）.png',
-    './image/R（合并）.png', './image/S（合并）.png', './image/T（合并）.png',
-    './image/U（合并）.png', './image/V（合并）.png', './image/W（合并）.png',
-    './image/X（合并）.png', './image/Y（合并）.png', './image/Z（合并）.png',
+    '../image/A（合并）.png', '../image/B（合并）.png', '../image/C（合并）.png',
+    '../image/D（合并）.png', '../image/E（合并）.png', '../image/F（合并）.png',
+    '../image/G（合并）.png', '../image/H（合并）.png', '../image/J（合并）.png',
+    '../image/K（合并）.png', '../image/L（合并）.png', '../image/M（合并）.png',
+    '../image/N（合并）.png', '../image/P（合并）.png', '../image/Q（合并）.png',
+    '../image/R（合并）.png', '../image/S（合并）.png', '../image/T（合并）.png',
+    '../image/U（合并）.png', '../image/V（合并）.png', '../image/W（合并）.png',
+    '../image/X（合并）.png', '../image/Y（合并）.png', '../image/Z（合并）.png',
 ]
 
 # [0-9]/[A-Z]:24个排除IO
 LETTER_DICT = {
-    0: './image/0（合并）.png', 1: './image/1（合并）.png', 2: './image/2（合并）.png',
-    3: './image/3（合并）.png', 4: './image/4（合并）.png', 5: './image/5（合并）.png',
-    6: './image/6（合并）.png', 7: './image/7（合并）.png', 8: './image/8（合并）.png',
-    9: './image/9（合并）.png',
-    'A': './image/A（合并）.png', 'B': './image/B（合并）.png', 'C': './image/C（合并）.png',
-    'D': './image/D（合并）.png', 'E': './image/E（合并）.png', 'F': './image/F（合并）.png',
-    'G': './image/G（合并）.png', 'H': './image/H（合并）.png', 'J': './image/J（合并）.png',
-    'K': './image/K（合并）.png', 'L': './image/L（合并）.png', 'M': './image/M（合并）.png',
-    'N': './image/N（合并）.png', 'P': './image/P（合并）.png', 'Q': './image/Q（合并）.png',
-    'R': './image/R（合并）.png', 'S': './image/S（合并）.png', 'T': './image/T（合并）.png',
-    'U': './image/U（合并）.png', 'V': './image/V（合并）.png', 'W': './image/W（合并）.png',
-    'X': './image/X（合并）.png', 'Y': './image/Y（合并）.png', 'Z': './image/Z（合并）.png',
+    0: '../image/0（合并）.png', 1: '../image/1（合并）.png', 2: '../image/2（合并）.png',
+    3: '../image/3（合并）.png', 4: '../image/4（合并）.png', 5: '../image/5（合并）.png',
+    6: '../image/6（合并）.png', 7: '../image/7（合并）.png', 8: '../image/8（合并）.png',
+    9: '../image/9（合并）.png',
+    'A': '../image/A（合并）.png', 'B': '../image/B（合并）.png', 'C': '../image/C（合并）.png',
+    'D': '../image/D（合并）.png', 'E': '../image/E（合并）.png', 'F': '../image/F（合并）.png',
+    'G': '../image/G（合并）.png', 'H': '../image/H（合并）.png', 'J': '../image/J（合并）.png',
+    'K': '../image/K（合并）.png', 'L': '../image/L（合并）.png', 'M': '../image/M（合并）.png',
+    'N': '../image/N（合并）.png', 'P': '../image/P（合并）.png', 'Q': '../image/Q（合并）.png',
+    'R': '../image/R（合并）.png', 'S': '../image/S（合并）.png', 'T': '../image/T（合并）.png',
+    'U': '../image/U（合并）.png', 'V': '../image/V（合并）.png', 'W': '../image/W（合并）.png',
+    'X': '../image/X（合并）.png', 'Y': '../image/Y（合并）.png', 'Z': '../image/Z（合并）.png',
 }
 
-# 32个 排除港澳台
+# 31个 排除港澳台
 PROVINCE_PATH = [
-    './image/湘（合并）.png', './image/津（合并）.png', './image/鄂（合并）.png', './image/渝（合并）.png',
-    './image/冀（合并）.png', './image/鲁（合并）.png', './image/辽（合并）.png', './image/浙（合并）.png',
-    './image/吉（合并）.png', './image/黑（合并）.png', './image/新（合并）.png', './image/云（合并）.png',
-    './image/琼（合并）.png', './image/青（合并）.png', './image/贵（合并）.png', './image/蒙（合并）.png',
-    './image/宁（合并）.png', './image/甘（合并）.png', './image/闽（合并）.png', './image/皖（合并）.png',
-    './image/苏（合并）.png', './image/粤（合并）.png', './image/豫（合并）.png', './image/川（合并）.png',
-    './image/藏（合并）.png', './image/陕（合并）.png', './image/桂（合并）.png',
-    './image/京（合并）.png', './image/沪（合并）.png', './image/赣（合并）.png', './image/晋（合并）.png'
+    '../image/湘（合并）.png', '../image/津（合并）.png', '../image/鄂（合并）.png', '../image/渝（合并）.png',
+    '../image/冀（合并）.png', '../image/鲁（合并）.png', '../image/辽（合并）.png', '../image/浙（合并）.png',
+    '../image/吉（合并）.png', '../image/黑（合并）.png', '../image/新（合并）.png', '../image/云（合并）.png',
+    '../image/琼（合并）.png', '../image/青（合并）.png', '../image/贵（合并）.png', '../image/蒙（合并）.png',
+    '../image/宁（合并）.png', '../image/甘（合并）.png', '../image/闽（合并）.png', '../image/皖（合并）.png',
+    '../image/苏（合并）.png', '../image/粤（合并）.png', '../image/豫（合并）.png', '../image/川（合并）.png',
+    '../image/藏（合并）.png', '../image/陕（合并）.png', '../image/桂（合并）.png',
+    '../image/京（合并）.png', '../image/沪（合并）.png', '../image/赣（合并）.png', '../image/晋（合并）.png'
 ]
 
 # 31个 排除港澳台
 PROVINCE_NAME = [
-    '湘', '津', '鄂', '渝',
-    '冀', '鲁', '辽', '浙',
-    '吉', '黑', '新', '云',
-    '琼', '青', '贵', '蒙',
-    '宁', '甘', '闽', '皖',
-    '苏', '粤', '豫', '川',
-    '藏', '陕', '桂',
-    '京', '沪', '赣', '晋'
+    '湘', '津', '鄂', '渝', '冀',
+    '鲁', '辽', '浙', '吉', '黑',
+    '新', '云', '琼', '青', '贵',
+    '蒙', '宁', '甘', '闽', '皖',
+    '苏', '粤', '豫', '川', '藏',
+    '陕', '桂', '京', '沪', '赣',
+    '晋'
 ]
 
 TYPE = ['D', 'F']
@@ -79,12 +78,12 @@ COORD = [(start_x, start_y), (start_x, start_y + 1 * offset), (start_x, start_y 
 
 
 class create_license():
-    def __init__(self, base_bg):
+    def __init__(self, base_bg, save_path):
         self.base_bg = base_bg
         self.province = 28
         self.city = 'A'
         self.type = 'D'
-        self.save_path = './buffer'
+        self.save_path = save_path
         # self.create_image()
         # self.test()
         # self.create_random_number()
@@ -124,13 +123,12 @@ class create_license():
         number_select_list = self.combo(number_list, number_count)
         letter_select_list = self.combo(letter_list, count - number_count)
 
-        for i in range(32):
-            if i >= 23:
+        for i in range(31):
                 for j in range(17):
                     num = 0
                     for nsl in number_select_list:  # 120
                         for lsl in letter_select_list:  # 2024
-                            if random.random() < 0.00076:  # 按照概率生成 否则太多了
+                            if random.random() < 0.0006:  # 按照概率生成 否则太多了
                                 group = nsl + lsl
                                 random.shuffle(group)
                                 # print(group)
@@ -142,7 +140,7 @@ class create_license():
                                 name = self.get_name(PROVINCE_NAME[i], letter_list[j], '', group)
                                 self.save_image(self.save_path, name, bg_image)
                                 num += 1
-                                print(i, j, group, num, end=' ')
+                                # print(i, j, group, num, end=' ')
 
     # 批量生成车牌
     def create_image(self, license_list):
@@ -225,9 +223,9 @@ class create_license():
         path = os.path.normpath(os.path.join(folder, name))
         cv2.imwrite(path, image)
         print(path)
-        ll = os.listdir(self.save_path)
-        os.rename(os.path.join(self.save_path, ll[0]), os.path.join(self.save_path, name))
-        self.movefile(os.path.join(self.save_path, name), os.path.join('./license2', name))
+        # ll = os.listdir(self.save_path)
+        # os.rename(os.path.join(self.save_path, ll[0]), os.path.join(self.save_path, name))
+        # self.movefile(os.path.join(self.save_path, name), os.path.join('../license2', name))
 
     def movefile(self, srcfile, dstfile):
         if not os.path.isfile(srcfile):
@@ -253,4 +251,4 @@ class create_license():
 
 if __name__ == '__main__':
     base_bg = '../image/base_bg.png'
-    license = create_license(base_bg=base_bg)
+    license = create_license(base_bg=base_bg, save_path='../../dataset/license')

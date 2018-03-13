@@ -73,7 +73,7 @@ class write_label_file():
                         train_file.write(file_list[i])
                         train_file.writelines('\n')
 
-folder_path = '../../plate_dataset/plate_process_image'
+folder_path = '../../dataset/license'
 train_txt = '../path/train.txt'
 valid_txt = '../path/valid.txt'
 wl = write_label_file()
