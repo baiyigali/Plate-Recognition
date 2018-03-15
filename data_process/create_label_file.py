@@ -22,6 +22,7 @@ class write_label_file():
 
         print(self.label_dict)
 
+    # get all files list of the folder_path with iteration
     def gci(self, path, file_list):
         parents = os.listdir(path)
         for parent in parents:
@@ -29,10 +30,7 @@ class write_label_file():
             if os.path.isdir(child):
                 self.gci(child, file_list)
             else:
-                str = os.path.normpath(child) + ' ' + os.path.split(os.path.dirname(child))[-1]
-                # str = os.path.normpath(child) + ' ' + label
-
-                # str = os.path.normpath('../' + child)
+                str = os.path.normpath(child)
                 file_list.append(str)
         return file_list
 
@@ -46,13 +44,14 @@ class write_label_file():
             print(str)
         return files_list
 
+    # write file_list into txt_file
     def write_file(self, txt_file, file_list):
         with open(txt_file, 'w') as file:
             np.random.shuffle(file_list)
             for fn in file_list:
                 try:
                     file.write(os.path.abspath(fn))
-                    print("wtite path {}".format(fn))
+                    print("write path {}".format(fn))
                     file.writelines('\n')
                 except:
                     print("path error {}".format(fn))
@@ -73,11 +72,17 @@ class write_label_file():
                         train_file.write(file_list[i])
                         train_file.writelines('\n')
 
-folder_path = '../../dataset/license'
+# folder_path = '../../plate_dataset/plate_process_image'
+folder_path = '../../plate_dataset/plate_process_image_without_shape'
+# folder_path = '../../plate_dataset/license'
 train_txt = '../path/train.txt'
 valid_txt = '../path/valid.txt'
 wl = write_label_file()
 file_list = wl.create_file(folder_path)
 wl.write_file_with_split(file_list, train_txt, valid_txt)
 
-
+# folder_path = '../../plate_dataset/plate_process_image'
+# test_txt = '../path/test.txt'
+# wl = write_label_file()
+# file_list = wl.create_file(folder_path)
+# wl.write_file(test_txt, file_list)

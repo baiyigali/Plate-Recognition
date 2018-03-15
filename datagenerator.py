@@ -105,7 +105,7 @@ class ImageDataGenerator:
         # for i in range(len(labels)):
         #     one_hot_labels[i][labels[i]] = 1
 
-        one_hot_labels = np.zeros((batch_size, self.n_digit, self.n_classes))
+        one_hot_labels = np.zeros((batch_size, self.n_digit, 1, self.n_classes))
         read_x = rx.read_xml(batch_size=batch_size, num_digit=self.n_digit, num_classes=self.n_classes)
         label_dict, _ = read_x.read_file('./data_process/label_name.xml')
         for i in range(len(labels)):

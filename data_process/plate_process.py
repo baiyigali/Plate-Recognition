@@ -1,5 +1,6 @@
 ﻿# encoding=utf-8
 import sys
+
 sys.path.append('..')
 sys.path.append('../..')
 import numpy as np
@@ -203,7 +204,7 @@ class plate_process():
         return dst
 
     # 图片高亮
-    def change_light(self, image, degree=1.2):
+    def change_light(self, image, degree=1.02):
         row, col, ch = image.shape
         print(image.shape)
         dst = image * degree
@@ -221,7 +222,7 @@ class plate_process():
             os.makedirs(folder)
         path = os.path.join(folder, name)
         cv2.imwrite(path, image)
-        print("save image {}!".format(path))
+        print("save image at {}".format(path))
 
     def show_image(self, image):
         cv2.namedWindow('demo')
@@ -229,9 +230,26 @@ class plate_process():
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
-    def process_pic(self, path, is_shear_mapping=False, is_wrap_affine=True, is_projective_transform=True,
-                    is_motion_blur=False, is_gauss_blur=True,
-                    is_gauss_noise=True):
+    def process_pic_without_shape_change(self, path, is_gauss_blur=True,
+                                         is_gauss_noise=True):
+        image = self.read_image(path)
+        try:
+            shape = image.shape
+        except:
+            print("{} file is broken".format(path))
+            return
+
+        if is_gauss_blur:
+            image = self.gauss_blur(image)
+        if is_gauss_noise:
+            image = self.gauss_noise(image)
+
+        return image
+
+    def process_pic_with_shape_change(self, path, is_shear_mapping=False, is_wrap_affine=True,
+                                      is_projective_transform=True,
+                                      is_motion_blur=False, is_gauss_blur=True,
+                                      is_gauss_noise=True):
         image = self.read_image(path)
         try:
             shape = image.shape
@@ -251,8 +269,6 @@ class plate_process():
         if is_gauss_noise:
             image = self.gauss_noise(image)
 
-        # self.show_image(image)
-
         return image
 
     # 对某个图像的区域进行扣取
@@ -263,40 +279,32 @@ class plate_process():
 
 
 pp = plate_process()
-image = pp.read_image('./云0B42KH.png')
-image = pp.change_light(image, 1.2)
-pp.show_image(image)
-# pp.process_pic('./云0B42KH.png',
-#                is_shear_mapping=False,
-#                is_wrap_affine=False,
-#                is_projective_transform=True,
-#                is_motion_blur=False,
-#                is_gauss_blur=False,
-#                is_gauss_noise=False)
+# image = pp.read_image('./云0B42KH.png')
+# image = pp.change_light(image, 1.2)
+# pp.show_image(image)
+# pp.process_pic_without_shape_change('./云0B42KH.png',
+#                                     is_gauss_blur=False,
+#                                     is_gauss_noise=False)
 
 import concurrent.futures
-folder = '../../plate_dataset/plate'
-save_folder = '../../plate_dataset/plate_process_image'
+folder = '../../plate_dataset/license'
+save_folder = '../../plate_dataset/plate_process_image_without_shape'
 
-# def exec(name):
-#     range_list = []
-#     for j in range(5):
-#         if random.random() < 0.5:
-#             range_list.append(True)
-#         else:
-#             range_list.append(False)
-#     range_list.append(True)
-#     path = os.path.join(folder, name)
-#     image = pp.process_pic(path,
-#                            range_list[0], range_list[1], range_list[2], range_list[3], range_list[4], range_list[5])
-#     pp.save_image(image, path, save_folder)
-#     return path
-#
-# files = os.listdir(folder)
-# with concurrent.futures.ThreadPoolExecutor(max_workers=30) as executor:
-#     for p in executor.map(exec, files):
-#         print(p)
+def exec(name):
+    range_list = []
+    for j in range(2):
+        if random.random() < 0.5:
+            range_list.append(True)
+        else:
+            range_list.append(False)
+    range_list.append(True)
+    path = os.path.join(folder, name)
+    # image = pp.process_pic_with_shape_change(path, range_list[0], range_list[1], range_list[2], range_list[3], range_list[4], range_list[5])
+    image = pp.process_pic_without_shape_change(path, range_list[0], range_list[1])
+    pp.save_image(image, name, save_folder)
+    return path
 
-
-
-
+names = os.listdir(folder)
+with concurrent.futures.ThreadPoolExecutor(max_workers=50) as executor:
+    for i, p in enumerate(executor.map(exec, names)):
+        print(i, p)

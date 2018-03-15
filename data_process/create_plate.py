@@ -71,9 +71,9 @@ LETTER = [
     'X', 'Y', 'Z']
 
 start_x = 4
-start_y = 265 - 70
-offset = 70
-COORD = [(start_x, start_y), (start_x, start_y + 1 * offset), (start_x, start_y + 2 * offset),
+start_y = 265 - 66
+offset = 68
+COORD = [(start_x, start_y - 4), (start_x, start_y + 1 * offset - 4), (start_x, start_y + 2 * offset),
          (start_x, start_y + 3 * offset), (start_x, start_y + 4 * offset), (start_x, start_y + 5 * offset)]
 
 
@@ -123,12 +123,13 @@ class create_license():
         number_select_list = self.combo(number_list, number_count)
         letter_select_list = self.combo(letter_list, count - number_count)
 
+        flag = 0
         for i in range(31):
                 for j in range(17):
                     num = 0
                     for nsl in number_select_list:  # 120
                         for lsl in letter_select_list:  # 2024
-                            if random.random() < 0.0006:  # 按照概率生成 否则太多了
+                            if random.random() < 0.001:  # 按照概率生成 否则太多了
                                 group = nsl + lsl
                                 random.shuffle(group)
                                 # print(group)
@@ -140,6 +141,8 @@ class create_license():
                                 name = self.get_name(PROVINCE_NAME[i], letter_list[j], '', group)
                                 self.save_image(self.save_path, name, bg_image)
                                 num += 1
+                                flag += 1
+                                print(flag)
                                 # print(i, j, group, num, end=' ')
 
     # 批量生成车牌
@@ -251,4 +254,4 @@ class create_license():
 
 if __name__ == '__main__':
     base_bg = '../image/base_bg.png'
-    license = create_license(base_bg=base_bg, save_path='../../dataset/license')
+    license = create_license(base_bg=base_bg, save_path='../../plate_dataset/license')

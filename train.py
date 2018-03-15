@@ -18,7 +18,7 @@ from sklearn.metrics import confusion_matrix
 class FCN_train():
     def __init__(self, image_size, num_epoch, batch_size, learning_rate,
                  num_digit, num_classes, train_file, valid_file, filewriter_path, checkpoint_path,
-                 num_residual_units, relu_leakiness=0.1, is_bottleneck=True, is_restore=True, device_id='2'):
+                 relu_leakiness=0.1, is_restore=True, device_id='2'):
         self.image_size = image_size
         self.num_epoch = num_epoch
         self.batch_size = batch_size
@@ -33,9 +33,7 @@ class FCN_train():
         utils.mkdirs(self.filewriter_path)
         self.checkpoint_path = checkpoint_path
         utils.mkdirs(self.checkpoint_path)
-        self.num_residual_units = num_residual_units
         self.relu_leakiness = relu_leakiness
-        self.is_bottlneck = is_bottleneck
         if is_restore:
             ckpt = tf.train.get_checkpoint_state(self.checkpoint_path)
             self.restore_checkpoint = ckpt.model_checkpoint_path
@@ -233,10 +231,9 @@ class FCN_train():
             # Loop over number of epochs
             for epoch in range(self.num_epoch):
 
-                print("Epoch number: {}/{}".format(epoch + 1, self.num_epoch))
+                print("Epoch number: {}/{}".format(epoch, self.num_epoch))
 
                 step = 1
-
                 while step < train_batches_per_epoch:
                     # Get a batch of images and labels
                     batch_xs, batch_ys = train_generator.next_batch(self.batch_size)
@@ -259,7 +256,6 @@ class FCN_train():
                             "loss6 = {:.4f},loss7 = {:.4f}, acc = {:.4f}".format(
                                 step * self.batch_size, train_batches_per_epoch * self.batch_size,
                                 loss0, loss1, loss2, loss3, loss4, loss5, loss6, loss7, acc))
-                        val_generator.reset_pointer()
 
                     step += 1
 
@@ -276,9 +272,6 @@ class FCN_train():
                 v_acc = 0.
                 count = 0
                 t1 = time.time()
-                y_predict = np.zeros((self.batch_size, self.num_classes))
-                # conf_matrix = np.ndarray((num_classes, num_classes))
-                print("valid batchs {}".format(val_batches_per_epoch))
                 for i in range(val_batches_per_epoch):
                     batch_validx, batch_validy = val_generator.next_batch(self.batch_size)
                     valid_loss0, valid_loss1, valid_loss2, valid_loss3, valid_loss4, \
@@ -298,17 +291,6 @@ class FCN_train():
                     v_acc += valid_acc
                     count += 1
 
-                    # y_true = np.argmax(batch_validy, 1)
-                    # y_pre = np.argmax(valid_out, 1)
-                    # for k in range(self.batch_size):
-                    #     if not (y_pre[k] == 0 or y_pre[k] == 1):
-                    #         y_pre[k] = 0
-                    #
-                    # if i == 0:
-                    #     conf_matrix = confusion_matrix(y_true, y_pre)
-                    # else:
-                    #     conf_matrix += confusion_matrix(y_true, y_pre)
-                    #     # print(i, conf_matrix)
                 v_loss0 /= count
                 v_loss1 /= count
                 v_loss2 /= count
@@ -319,13 +301,11 @@ class FCN_train():
                 v_loss7 /= count
                 v_acc /= count
                 t2 = time.time() - t1
-                tf.summary.scalar('valid_acc', v_acc)
                 print(
                     "Validation loss0 = {:.4f}, loss1 = {:.4f}, loss2 = {:.4f}, loss3 = {:.4f}, loss4 = {:.4f},"
                     "loss5 = {:.4f}, loss6 = {:.4f},loss7 = {:.4f}, acc = {:.4f}".format(
                         v_loss0, v_loss1, v_loss2, v_loss3, v_loss4, v_loss5, v_loss6, v_loss7, v_acc))
                 print("Test image {:.4f}ms per image".format(t2 * 1000 / (val_batches_per_epoch * self.batch_size)))
-                # print(conf_matrix)
 
                 # Reset the file pointer of the image data generator
                 val_generator.reset_pointer()
@@ -350,11 +330,9 @@ rt = FCN_train(image_size=(100, 30),
                valid_file="./path/valid.txt",
                filewriter_path="./tmp/fcn4/tensorboard",
                checkpoint_path="./tmp/fcn4/checkpoints",
-               num_residual_units=2,
                relu_leakiness=0.1,
-               is_bottleneck=True,
                is_restore=False,
-               device_id='0'
+               device_id='0,1'
                )
 
 rt.fit()
