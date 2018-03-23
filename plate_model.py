@@ -2,11 +2,13 @@ import tensorflow as tf
 import tensorflow.contrib.slim as slim
 import cv2
 import numpy as np
+import data_process.label as data_label
+
 
 class plate_Net(object):
-    def __init__(self, images, labels, num_classes):
+    def __init__(self, images, batch_size, num_classes=10):
         self.images = images
-        self.labels = labels
+        self.batch_size = batch_size
         self.num_classes = num_classes
         pass
 
@@ -18,16 +20,16 @@ class plate_Net(object):
                                 weights_initializer=tf.truncated_normal_initializer(0.0, 0.01),
                                 weights_regularizer=slim.l2_regularizer(0.0005)):
                 net = self.images
-                net = slim.conv2d(inputs=net, num_outputs=64, kernel_size=5, stride=1, padding='SAME', scope='conv_1')
+                net = slim.conv2d(inputs=net, num_outputs=64, kernel_size=3, stride=1, padding='VALID', scope='conv_1')
                 net = slim.max_pool2d(inputs=net, kernel_size=3, stride=2, padding='SAME', scope='pool_1')
-                net = slim.conv2d(inputs=net, num_outputs=128, kernel_size=3, stride=1, padding='SAME', scope='conv_2')
+                net = slim.conv2d(inputs=net, num_outputs=128, kernel_size=3, stride=1, padding='VALID', scope='conv_2')
                 net = slim.max_pool2d(inputs=net, kernel_size=2, padding='SAME', scope='pool_2')
                 net = slim.conv2d(inputs=net, num_outputs=256, kernel_size=3, stride=1, padding='SAME', scope='conv_3')
                 net = slim.max_pool2d(inputs=net, kernel_size=2, padding='SAME', scope='pool_3')
                 net = slim.conv2d(inputs=net, num_outputs=512, kernel_size=3, stride=1, padding='VALID', scope='conv_4')
-                net = slim.conv2d(inputs=net, num_outputs=256, kernel_size=3, stride=1, padding='VALID', scope='conv_5')
-                net = slim.conv2d(inputs=net, num_outputs=self.num_classes, kernel_size=1, stride=1, padding='VALID', scope='conv_6')
-                net = slim.softmax(net, scope='output')
+                net = slim.conv2d(inputs=net, num_outputs=256, kernel_size=2, stride=1, padding='VALID', scope='conv_5')
+                # net = slim.conv2d(inputs=net, num_outputs=self.num_classes, kernel_size=1, stride=1, padding='VALID', scope='conv_6')
+                # net = slim.softmax(net, scope='output')
         return net
 
     def _leaky_relu(self, alpha):
@@ -50,12 +52,9 @@ class plate_Net(object):
             tf.summary.scalar('accuracy', accuracy)
         return accuracy
 
-
-
-
 # image = cv2.imread("./plate_image/sample.png")
-# image = cv2.resize(image, (100, 30))
-# input = tf.placeholder(tf.float32, [None, 96, 33, 3])
-# fcn = plate_Net(input, 82)
-# model = fcn.network_model(alpha=0.1)
-# print(model)
+# # image = cv2.resize(image, (100, 30))
+input = tf.placeholder(tf.float32, [None, 31, 94, 3])
+fcn = plate_Net(input, batch_size=32, num_classes=65)
+model = fcn.network_model(alpha=0.1)
+print(model)

@@ -25,9 +25,9 @@ class read_xml():
     # Input：京A1R93TX
     # Output： one_hot_label =
     def plate2label(self, plate):
-        one_hot_label = np.zeros((1, self.num_digit, 1, self.num_classes))
+        one_hot_label = np.zeros((1, 1, self.num_digit, self.num_classes))
         for i, s in enumerate(plate):
-            one_hot_label[0, i, 0, int(data_label.class_dict[s])] = 1
+            one_hot_label[0, 0, i, int(data_label.class_dict[s])] = 1
         # print(one_hot_label)
         return one_hot_label
 

@@ -38,6 +38,26 @@ class plate_process():
 
         return dst
 
+    def shear_mapping2(self, image, offset=None):
+        rows, cols, _ = image.shape
+        pts1 = np.float32([[0, 0], [0, rows], [cols, 0], [cols, rows]])
+        rand_xy = random.random()
+        rand_s = random.random()
+        if offset is None:
+            offset = random.randrange(int(-rows / 30.), int(rows / 10.))
+        size = (cols, rows)
+        if rand_xy < 0.5:  # 沿x轴错切
+            pts2 = np.float32(
+                [[0 + offset, 0], [0 - offset, rows], [cols + offset, 0], [cols - offset, rows]])  # 固定B, C点不动
+        else:  # 沿y轴错切
+            pts2 = np.float32(
+                [[0, 0 + offset], [0, rows + offset], [cols, 0 - offset], [cols, rows - offset]])  # 固定C, D点不动
+
+        M = cv2.getPerspectiveTransform(pts1, pts2)
+        dst = cv2.warpPerspective(image, M, size)
+
+        return dst
+
     def random_int(self, a=-10, b=10):
         return random.randint(a, b)
 
@@ -271,6 +291,25 @@ class plate_process():
 
         return image
 
+    def process_pic_with_shape_change2(self, path,
+                                       is_shear_mapping=True,
+                                       is_gauss_blur=True,
+                                       is_gauss_noise=True):
+        image = self.read_image(path)
+        try:
+            shape = image.shape
+        except:
+            print("{} file is broken".format(path))
+            return
+        if is_shear_mapping:
+            image = self.shear_mapping2(image)
+        if is_gauss_blur:
+            image = self.gauss_blur(image)
+        if is_gauss_noise:
+            image = self.gauss_noise(image)
+
+        return image
+
     # 对某个图像的区域进行扣取
     # 2018.03.06 这个之后写
     def crop_image(self, path, box=(0, 10, 10, 10)):
@@ -287,8 +326,10 @@ pp = plate_process()
 #                                     is_gauss_noise=False)
 
 import concurrent.futures
+
 folder = '../../plate_dataset/license'
-save_folder = '../../plate_dataset/plate_process_image_without_shape'
+save_folder = '../../plate_dataset/plate_process_image_with_shear'
+
 
 def exec(name):
     range_list = []
@@ -299,10 +340,11 @@ def exec(name):
             range_list.append(False)
     range_list.append(True)
     path = os.path.join(folder, name)
-    # image = pp.process_pic_with_shape_change(path, range_list[0], range_list[1], range_list[2], range_list[3], range_list[4], range_list[5])
-    image = pp.process_pic_without_shape_change(path, range_list[0], range_list[1])
+    image = pp.process_pic_with_shape_change(path, range_list[0], range_list[1], range_list[2], range_list[3], range_list[4], range_list[5])
+    # image = pp.process_pic_with_shape_change2(path)
     pp.save_image(image, name, save_folder)
     return path
+
 
 names = os.listdir(folder)
 with concurrent.futures.ThreadPoolExecutor(max_workers=50) as executor:

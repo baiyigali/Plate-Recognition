@@ -72,15 +72,18 @@ class write_label_file():
                         train_file.write(file_list[i])
                         train_file.writelines('\n')
 
-# folder_path = '../../plate_dataset/plate_process_image'
-folder_path = '../../plate_dataset/plate_process_image_without_shape'
-# folder_path = '../../plate_dataset/license'
-train_txt = '../path/train.txt'
-valid_txt = '../path/valid.txt'
-wl = write_label_file()
-file_list = wl.create_file(folder_path)
-wl.write_file_with_split(file_list, train_txt, valid_txt)
 
+# folder_path = '../../plate_dataset/plate_process_image'
+# # folder_path = '../../plate_dataset/plate_process_image_without_shape'
+# # folder_path = '../../plate_dataset/plate_process_image_with_shear'
+# # folder_path = '../../plate_dataset/license'
+# #
+# train_txt = '../path/plate_process_image/train.txt'
+# valid_txt = '../path/plate_process_image/valid.txt'
+# wl = write_label_file()
+# file_list = wl.create_file(folder_path)
+# wl.write_file_with_split(file_list, train_txt, valid_txt)
+#
 # folder_path = '../../plate_dataset/plate_process_image'
 # test_txt = '../path/test.txt'
 # wl = write_label_file()

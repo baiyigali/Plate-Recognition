@@ -46,7 +46,8 @@ class plateNet_train(object):
     def init_model(self):
         self.x = tf.placeholder(tf.float32, [None, self.image_size[0], self.image_size[1], 3], name='input')
         self.y = tf.placeholder(tf.float32, [None, self.num_digit, 1, self.num_classes])
-        self.model = plate_model.plate_Net(self.x, self.y, num_classes=self.num_classes)
+        tf.add_to_collection('predict_network', self.y)
+        self.model = plate_model.plate_Net(self.x, batch_size=self.batch_size, num_classes=self.num_classes)
         self.predict = self.model.network_model()
         self.accuracy = self.model.accuracy(self.predict, self.y)
         self.loss = self.model.loss(self.predict, self.y)
@@ -147,26 +148,39 @@ class plateNet_train(object):
 
                 print("{} Saving checkpoint of model...".format(datetime.now()))
                 # save checkpoint of the model
-                checkpoint_name = os.path.join(self.checkpoint_path, 'epoch')
-                self.saver.save(sess, checkpoint_name, global_step=epoch)
+                checkpoint_name = os.path.join(self.checkpoint_path, str(epoch + 1))
+                self.saver.save(sess, checkpoint_name)
 
                 print("{} Model checkpoint saved at {}".format(datetime.now(), checkpoint_name))
 
 
 if __name__ == '__main__':
-    pt = plateNet_train(image_size=(96, 33),
+
+    train_file = "./path/license/train.txt"
+    valid_file = "./path/license/valid.txt"
+
+    # train_file = "./path/plate_process_image/train.txt"
+    # valid_file = "./path/plate_process_image/valid.txt"
+    #
+    # train_file = "./path/plate_process_image_with_shear/train.txt"
+    # valid_file = "./path/plate_process_image_with_shear/valid.txt"
+    #
+    # train_file = "./path/palte_process_image_without_shape/train.txt"
+    # valid_file = "./path/palte_process_image_without_shape/valid.txt"
+
+    pt = plateNet_train(image_size=(31, 94),
                         num_epoch=200,
                         batch_size=64,
-                        learning_rate=0.0001,
+                        learning_rate=0.001,
                         num_digit=8,
                         num_classes=65,
-                        train_file="./path/train.txt",
-                        valid_file="./path/valid.txt",
+                        train_file=train_file,
+                        valid_file=valid_file,
                         filewriter_path="./tmp/platenet/tensorboard",
-                        checkpoint_path="./tmp/platenet/noshape_checkpoints",
+                        checkpoint_path="./tmp/platenet/smooth_checkpoints",
                         relu_leakiness=0.1,
-                        is_restore=True,
+                        is_restore=False,
                         restore_path='./tmp/platenet/smooth_checkpoints',
-                        device_id='3,4'
+                        device_id='4,5'
                         )
     pt.train()

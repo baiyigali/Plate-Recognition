@@ -83,7 +83,6 @@ class ImageDataGenerator:
             [batch_size, self.scale_size[0], self.scale_size[1], 3])#the last parameter is image channel
         for i in range(len(paths)):
             img = cv2.imread(paths[i])
-
             # flip image at random if flag is selected
             if self.horizontal_flip and np.random.random() < 0.5:
                 img = cv2.flip(img, 1)
@@ -107,7 +106,6 @@ class ImageDataGenerator:
 
         one_hot_labels = np.zeros((batch_size, self.n_digit, 1, self.n_classes))
         read_x = rx.read_xml(batch_size=batch_size, num_digit=self.n_digit, num_classes=self.n_classes)
-        label_dict, _ = read_x.read_file('./data_process/label_name.xml')
         for i in range(len(labels)):
             m = read_x.plate2label(labels[i])
             one_hot_labels[i] = m[0]
@@ -118,5 +116,6 @@ class ImageDataGenerator:
 # read_x = rx.read_xml(batch_size=32, num_digit=8, num_classes=82)
 # label_dict, _ = read_x.read_file('./data_process/label_name.xml')
 # print(label_dict)
-# train = ImageDataGenerator('./path/train.txt', scale_size=(100, 30), num_digit=8, num_classes=82)
-# x = train.next_batch(32)
+# train = ImageDataGenerator('./path/train.txt', scale_size=(100, 30), num_digit=8, num_classes=65)
+# x, _ = train.next_batch(32)
+# print(x.shape)
