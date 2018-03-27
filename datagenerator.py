@@ -6,8 +6,8 @@ import data_process.read_xml as rx
 
 
 class ImageDataGenerator:
-    def __init__(self, class_list, horizontal_flip=False, shuffle=False,
-                 mean=np.array([127.5, 127.5, 127.5]), scale_size=(227, 227), num_digit=8, num_classes=2):#mean=np.array([127.5]),np.array(,,)
+    def __init__(self, class_list, scale_size, horizontal_flip=False, shuffle=False,
+                 mean=np.array([112.5, 161.5, 106.5]), num_digit=8, num_classes=2):#mean=np.array([127.5]),np.array(,,)
 
         # Init params
         self.horizontal_flip = horizontal_flip
@@ -104,7 +104,7 @@ class ImageDataGenerator:
         # for i in range(len(labels)):
         #     one_hot_labels[i][labels[i]] = 1
 
-        one_hot_labels = np.zeros((batch_size, self.n_digit, 1, self.n_classes))
+        one_hot_labels = np.zeros((batch_size, 1, self.n_digit, self.n_classes))
         read_x = rx.read_xml(batch_size=batch_size, num_digit=self.n_digit, num_classes=self.n_classes)
         for i in range(len(labels)):
             m = read_x.plate2label(labels[i])
