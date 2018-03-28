@@ -232,7 +232,41 @@ class plate_process():
 
     # 生成遮挡物
     def add_blocked(self, image):
-        pass
+        height, width, _ = image.shape
+        nums = np.random.random_integers(0, 20)  # 随机生成遮挡物的数量
+        for i in range(nums):
+            size = np.random.random_integers(10, 30)  # 随机生成遮挡物尺寸
+            x = np.random.random_integers(0, width - size)  # 随机生成坐标
+            y = np.random.random_integers(0, height - size)
+            block = np.array(np.random.randint(0, 255, size ** 2 * 3)).reshape((size, size, 3))
+            image[y:y + size, x:x + size, :] = block
+        return image
+
+    # 生成白色遮挡 模拟高光
+    def add_white(self, image):
+        height, width, _ = image.shape
+        nums = np.random.random_integers(0, 3)  # 随机生成遮挡物的数量
+        for i in range(nums):
+            size = np.random.random_integers(50, 100)  # 随机生成遮挡物尺寸
+            x = np.random.random_integers(0, width - size)  # 随机生成坐标
+            y = np.random.random_integers(0, height - size)
+            block = image[y:y + size, x:x + 2 * size, :]
+            white = np.full_like(block, 255)
+            alpha = np.random.randint(1, 7) / 10.
+            gamma = np.random.uniform(0.1, 4)
+            image[y:y + size, x:x + 2 * size, :] = cv2.addWeighted(block, alpha, white, 1 - alpha, gamma)
+        return image
+
+    def hist_euqalize(self, image):
+        image[0] = cv2.equalizeHist(image[0])
+        image[1] = cv2.equalizeHist(image[1])
+        image[2] = cv2.equalizeHist(image[2])
+        return image
+
+    def gamma_corection(self, image):
+        gamma = np.random.uniform(0.1, 4)
+        dst = np.power(image / 255.0, gamma)
+        return dst
 
     def read_image(self, path):
         return cv2.imdecode(np.fromfile(path, dtype=np.uint8), -1)
@@ -294,19 +328,24 @@ class plate_process():
     def process_pic_with_shape_change2(self, path,
                                        is_shear_mapping=True,
                                        is_gauss_blur=True,
-                                       is_gauss_noise=True):
+                                       is_gauss_noise=True,
+                                       is_add_block=True,
+                                       is_add_white=True,
+                                       is_gamma_corection=True):
         image = self.read_image(path)
-        try:
-            shape = image.shape
-        except:
-            print("{} file is broken".format(path))
-            return
-        if is_shear_mapping:
-            image = self.shear_mapping2(image)
-        if is_gauss_blur:
-            image = self.gauss_blur(image)
-        if is_gauss_noise:
-            image = self.gauss_noise(image)
+        if image.shape is not None:
+            if is_shear_mapping:
+                image = self.shear_mapping2(image)
+            if is_gauss_blur:
+                image = self.gauss_blur(image)
+            if is_gauss_noise:
+                image = self.gauss_noise(image)
+            if is_add_block:
+                image = self.add_blocked(image)
+            if is_add_white:
+                image = self.add_white(image)
+            if is_gamma_corection:
+                image = self.gamma_corection(image)
 
         return image
 
@@ -319,7 +358,8 @@ class plate_process():
 
 pp = plate_process()
 # image = pp.read_image('./云0B42KH.png')
-# image = pp.change_light(image, 1.2)
+# # image = pp.change_light(image, 1.2)
+# image = pp.hist_euqalize(image)
 # pp.show_image(image)
 # pp.process_pic_without_shape_change('./云0B42KH.png',
 #                                     is_gauss_blur=False,
@@ -328,19 +368,20 @@ pp = plate_process()
 import concurrent.futures
 
 folder = '../../plate_dataset/license'
-save_folder = '../../plate_dataset/plate_process_image_with_shear'
+save_folder = '../../plate_dataset/plate_process_image_with_block'
 
 
 def exec(name):
     range_list = []
-    for j in range(2):
+    for j in range(6):
         if random.random() < 0.5:
             range_list.append(True)
         else:
             range_list.append(False)
-    range_list.append(True)
+
     path = os.path.join(folder, name)
-    image = pp.process_pic_with_shape_change(path, range_list[0], range_list[1], range_list[2], range_list[3], range_list[4], range_list[5])
+    image = pp.process_pic_with_shape_change2(path, range_list[0], range_list[1], range_list[2], range_list[3],
+                                             range_list[4], range_list[5])
     # image = pp.process_pic_with_shape_change2(path)
     pp.save_image(image, name, save_folder)
     return path
