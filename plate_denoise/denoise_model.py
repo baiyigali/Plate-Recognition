@@ -6,7 +6,7 @@ class denoise_autoencoder():
         self.noise_images = noise_images
         pass
 
-    def network_model(self, scope='dae', alpha=0.1):
+    def network_model(self, scope='dae'):
         with tf.variable_scope(scope):
             x = self.noise_images
 
@@ -27,7 +27,6 @@ class denoise_autoencoder():
             x = tf.image.resize_nearest_neighbor(x, (30, 100))
             x = tf.layers.conv2d(x, filters=3, kernel_size=3, strides=1, padding='same', activation=tf.nn.relu,
                                  name='conv_6')
-
         return x
 
     def _leaky_relu(self, alpha):

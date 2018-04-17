@@ -183,7 +183,7 @@ class create_license():
     # 合成汽车牌照
     def create_license(self, bg_image, number_list):
 
-        if not bg_image.data:
+        if bg_image.data is None:
             print('the background image {} with wrong path'.format(self.base_bg))
             return
 

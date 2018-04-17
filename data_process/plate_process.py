@@ -8,6 +8,9 @@ import cv2
 import math
 import random
 import os
+import concurrent.futures
+
+PROJECT_PATH = '/home1/fsb/project/LPR/Plate-Recognition'
 
 
 # 对图像进行错切变换、仿射变换、投影变换、运动模糊、高斯模糊、噪声处理
@@ -17,7 +20,7 @@ class plate_process():
         pass
 
     # 错切变换
-    def shear_mapping(self, image, angel=None, max_angel=10):
+    def _shear_mapping(self, image, angel=None, max_angel=10):
         shape = image.shape
         if angel is None:
             angel = random.random() * 10
@@ -38,7 +41,7 @@ class plate_process():
 
         return dst
 
-    def shear_mapping2(self, image, offset=None):
+    def _shear_mapping2(self, image, offset=None):
         rows, cols, _ = image.shape
         pts1 = np.float32([[0, 0], [0, rows], [cols, 0], [cols, rows]])
         rand_xy = random.random()
@@ -58,43 +61,43 @@ class plate_process():
 
         return dst
 
-    def random_int(self, a=-10, b=10):
+    def _random_int(self, a=-10, b=10):
         return random.randint(a, b)
 
-    # 放射变换
-    def wrap_affine(self, image):
+    # 仿射变换
+    def _wrap_affine(self, image):
         rows, cols, _ = image.shape
 
         def up():
             # rd = random.randint(5, 20)
             srcpoint = np.float32([[0, 0], [0, rows], [cols, rows]])
-            canvas = np.float32([[0 + self.random_int(), 0 + self.random_int()],
-                                 [0 + self.random_int(), rows + self.random_int()],
-                                 [cols + self.random_int(), rows + self.random_int()]])
+            canvas = np.float32([[0 + self._random_int(), 0 + self._random_int()],
+                                 [0 + self._random_int(), rows + self._random_int()],
+                                 [cols + self._random_int(), rows + self._random_int()]])
             return srcpoint, canvas
 
         def right():
             rd = random.randint(5, 20)
             srcpoint = np.float32([[0, 0], [cols, 0], [cols, rows]])
-            canvas = np.float32([[0 + self.random_int(), 0 + self.random_int()],
-                                 [cols + self.random_int(), 0 + self.random_int()],
-                                 [cols + self.random_int(), rows + self.random_int()]])
+            canvas = np.float32([[0 + self._random_int(), 0 + self._random_int()],
+                                 [cols + self._random_int(), 0 + self._random_int()],
+                                 [cols + self._random_int(), rows + self._random_int()]])
             return srcpoint, canvas
 
         def down():
             rd = random.randint(5, 20)
             srcpoint = np.float32([[cols, 0], [0, rows], [cols, rows]])
-            canvas = np.float32([[cols + self.random_int(), 0 + self.random_int()],
-                                 [0 + self.random_int(), rows + self.random_int()],
-                                 [cols + self.random_int(), rows + self.random_int()]])
+            canvas = np.float32([[cols + self._random_int(), 0 + self._random_int()],
+                                 [0 + self._random_int(), rows + self._random_int()],
+                                 [cols + self._random_int(), rows + self._random_int()]])
             return srcpoint, canvas
 
         def left():
             rd = random.randint(5, 20)
             srcpoint = np.float32([[0, 0], [0, rows], [cols, 0]])
-            canvas = np.float32([[0 + self.random_int(), 0 + self.random_int()],
-                                 [0 + self.random_int(), rows + self.random_int()],
-                                 [cols + self.random_int(), 0 + self.random_int()]])
+            canvas = np.float32([[0 + self._random_int(), 0 + self._random_int()],
+                                 [0 + self._random_int(), rows + self._random_int()],
+                                 [cols + self._random_int(), 0 + self._random_int()]])
             return srcpoint, canvas
 
         switch = {0: up(),
@@ -110,7 +113,7 @@ class plate_process():
         return dst
 
     # 投影变换
-    def projective_transform(self, image):
+    def _projective_transform(self, image):
         rows, cols, _ = image.shape  # (185, 620)
 
         x_min = int(cols * 0.02)
@@ -182,7 +185,7 @@ class plate_process():
         return dst
 
     # 运动模糊
-    def motion_blur(self, image, degree=None, angle=None):
+    def _motion_blur(self, image, degree=None, angle=None):
         image = np.array(image)
         if degree is None:
             degree = random.randint(5, 18)
@@ -202,18 +205,18 @@ class plate_process():
         return dst
 
     # 对焦模糊、高斯模糊
-    def gauss_blur(self, image, degree=12):
+    def _gauss_blur(self, image, degree=12):
         if degree is None:
-            degree = random.randint(2, 12)
+            degree = random.randint(8, 12)
 
         return cv2.blur(image, (degree, degree))
 
     # 噪声
-    def gauss_noise(self, image, degree=None):
+    def _gauss_noise(self, image, degree=None):
         row, col, ch = image.shape
         mean = 0
         if degree is None:
-            degree = random.uniform(10, 100)
+            degree = random.uniform(20, 60)
 
         sigma = degree ** 0.5
         gauss = np.random.normal(mean, sigma, (row, col, ch))
@@ -224,26 +227,25 @@ class plate_process():
         return dst
 
     # 图片高亮
-    def change_light(self, image, degree=1.02):
+    def _change_light(self, image, degree=1.02):
         row, col, ch = image.shape
-        print(image.shape)
         dst = image * degree
         return dst
 
     # 生成遮挡物
-    def add_blocked(self, image):
+    def _add_blocked(self, image):
         height, width, _ = image.shape
-        nums = np.random.random_integers(0, 20)  # 随机生成遮挡物的数量
+        nums = np.random.random_integers(0, 10)  # 随机生成遮挡物的数量
         for i in range(nums):
-            size = np.random.random_integers(10, 30)  # 随机生成遮挡物尺寸
+            size = np.random.random_integers(20, 50)  # 随机生成遮挡物尺寸
             x = np.random.random_integers(0, width - size)  # 随机生成坐标
             y = np.random.random_integers(0, height - size)
             block = np.array(np.random.randint(0, 255, size ** 2 * 3)).reshape((size, size, 3))
             image[y:y + size, x:x + size, :] = block
         return image
 
-    # 生成白色遮挡 模拟高光
-    def add_white(self, image):
+    # 生成颜色遮挡 模拟高光???
+    def _add_color(self, image):
         height, width, _ = image.shape
         nums = np.random.random_integers(0, 3)  # 随机生成遮挡物的数量
         for i in range(nums):
@@ -251,143 +253,164 @@ class plate_process():
             x = np.random.random_integers(0, width - size)  # 随机生成坐标
             y = np.random.random_integers(0, height - size)
             block = image[y:y + size, x:x + 2 * size, :]
-            white = np.full_like(block, 255)
+            if np.random.random() < 0.5:
+                color = np.full_like(block, np.random.randint(0, 254))
+            else:
+                color = np.full_like(block, 255)
             alpha = np.random.randint(1, 7) / 10.
             gamma = np.random.uniform(0.1, 4)
-            image[y:y + size, x:x + 2 * size, :] = cv2.addWeighted(block, alpha, white, 1 - alpha, gamma)
+            image[y:y + size, x:x + 2 * size, :] = cv2.addWeighted(block, alpha, color, 1 - alpha, gamma)
         return image
 
-    def hist_euqalize(self, image):
-        image[0] = cv2.equalizeHist(image[0])
-        image[1] = cv2.equalizeHist(image[1])
-        image[2] = cv2.equalizeHist(image[2])
-        return image
-
-    def gamma_corection(self, image):
-        gamma = np.random.uniform(0.1, 4)
-        dst = np.power(image / 255.0, gamma)
+    def _hist_euqalize(self, image):
+        image = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+        dst = cv2.equalizeHist(image)
         return dst
 
-    def read_image(self, path):
+    def _gamma_correction(self, image, gamma=None):
+        if gamma is None:
+            gamma = np.random.uniform(0.9, 1.1)
+        dst = np.power(image / 255.0, gamma) * 255.0
+        return dst
+
+    def _move(self, image):
+        x = np.random.randint(-10, 10)
+        y = np.random.randint(-10, 10)
+        M = np.float32([[1, 0, x], [0, 1, y]])
+        dst = cv2.warpAffine(image, M, (image.shape[1], image.shape[0]))
+        return dst
+
+    def _zoom(self, image, coords):
+
+        row, col, _ = image.shape
+        bg_pic = os.listdir(os.path.join(PROJECT_PATH, 'image/car'))
+        back_ground = cv2.imread(os.path.join(PROJECT_PATH, "./image/car/") + np.random.choice(bg_pic, 1)[0])
+        dst = cv2.resize(back_ground, (col, row))
+        # dst = np.zeros_like(image)
+        scale = np.random.randint(9, 11) / 10.
+        methods = [cv2.INTER_NEAREST, cv2.INTER_LINEAR, cv2.INTER_AREA,
+                   cv2.INTER_CUBIC, cv2.INTER_LANCZOS4]
+        pic = image
+        resized = cv2.resize(src=pic, dsize=(int(col * scale), int(row * scale)),
+                             interpolation=np.random.choice(methods, 1)[0])
+        # self._show_image(resized)
+        new_row, new_col, _ = resized.shape
+        if row > new_row:
+            x = int((row - new_row) / 2)
+            y = int((col - new_col) / 2)
+            dst[x:x + new_row, y:y + new_col, :] = resized
+        else:
+            x = int((new_row - row) / 2)
+            y = int((new_col - col) / 2)
+            dst = resized[x:x + row, y:y + col, :]
+
+        # 根据比例更改坐标系的值
+        if coords is not None:
+            for i, coord in enumerate(coords):
+                coord[0:2] = coord[0:2] * scale + (1 - scale) / 2
+                coord[2:4] = coord[2:4] * scale
+
+        return dst, coords
+
+    def _scale(self, image, dst_row=60):
+        row, col, _ = image.shape
+        first_row = 20.
+        dst = cv2.resize(image, dsize=(int(first_row * col / row), int(first_row)))
+        dst = cv2.resize(dst, dsize=(int(dst_row * col / row), int(dst_row)))
+        return dst
+
+    def _read_image(self, path):
         return cv2.imdecode(np.fromfile(path, dtype=np.uint8), -1)
 
-    def save_image(self, image, name, folder):
+    def _save_image(self, image, name, folder='./'):
         if not os.path.exists(folder):
             os.makedirs(folder)
         path = os.path.join(folder, name)
         cv2.imwrite(path, image)
         print("save image at {}".format(path))
 
-    def show_image(self, image):
+    def _show_image(self, image):
         cv2.namedWindow('demo')
         cv2.imshow('demo', image)
         cv2.waitKey(0)
         cv2.destroyAllWindows()
 
-    def process_pic_without_shape_change(self, path, is_gauss_blur=True,
-                                         is_gauss_noise=True):
-        image = self.read_image(path)
-        try:
-            shape = image.shape
-        except:
-            print("{} file is broken".format(path))
-            return
-
-        if is_gauss_blur:
-            image = self.gauss_blur(image)
-        if is_gauss_noise:
-            image = self.gauss_noise(image)
-
-        return image
-
-    def process_pic_with_shape_change(self, path, is_shear_mapping=False, is_wrap_affine=True,
-                                      is_projective_transform=True,
-                                      is_motion_blur=False, is_gauss_blur=True,
-                                      is_gauss_noise=True):
-        image = self.read_image(path)
-        try:
-            shape = image.shape
-        except:
-            print("{} file is broken".format(path))
-            return
-        if is_shear_mapping:
-            image = self.shear_mapping(image)
-        if is_wrap_affine:
-            image = self.wrap_affine(image)
-        if is_projective_transform:
-            image = self.projective_transform(image)
-        if is_motion_blur:
-            image = self.motion_blur(image)
-        if is_gauss_blur:
-            image = self.gauss_blur(image)
-        if is_gauss_noise:
-            image = self.gauss_noise(image)
-
-        return image
-
-    def process_pic_with_shape_change2(self, path,
-                                       is_shear_mapping=True,
-                                       is_gauss_blur=True,
-                                       is_gauss_noise=True,
-                                       is_add_block=True,
-                                       is_add_white=True,
-                                       is_gamma_corection=True):
-        image = self.read_image(path)
+    def process_pic_with_shape_change(self, image,
+                                      coords=None,
+                                      is_zoom=True,
+                                      is_shear_mapping=True,
+                                      is_gauss_blur=True,
+                                      is_gauss_noise=True,
+                                      is_add_white=True,
+                                      is_gamma_correction=False,
+                                      is_move=True,
+                                      is_scale=True):
         if image.shape is not None:
-            if is_shear_mapping:
-                image = self.shear_mapping2(image)
-            if is_gauss_blur:
-                image = self.gauss_blur(image)
-            if is_gauss_noise:
-                image = self.gauss_noise(image)
-            if is_add_block:
-                image = self.add_blocked(image)
-            if is_add_white:
-                image = self.add_white(image)
-            if is_gamma_corection:
-                image = self.gamma_corection(image)
+            if is_zoom: image, coords = self._zoom(image, coords)
 
-        return image
+            if is_shear_mapping: image = self._shear_mapping2(image)
+
+            if is_gauss_blur: image = self._gauss_blur(image)
+
+            if is_gauss_noise: image = self._gauss_noise(image)
+
+            # if is_add_block: image = self.add_blocked(image)
+            if is_add_white: image = self._add_color(image)
+
+            if is_gamma_correction: image = self._gamma_correction(image)
+
+            if is_move: image = self._move(image)
+            if is_scale: image = self._scale(image)
+            image = cv2.resize(image, (100, 30)) #  to (100, 30)
+
+        return image, coords
 
     # 对某个图像的区域进行扣取
     # 2018.03.06 这个之后写
     def crop_image(self, path, box=(0, 10, 10, 10)):
-        image = self.read_image(path)
+        image = self._read_image(path)
         pass
 
 
-pp = plate_process()
-# image = pp.read_image('./云0B42KH.png')
-# # image = pp.change_light(image, 1.2)
-# image = pp.hist_euqalize(image)
-# pp.show_image(image)
-# pp.process_pic_without_shape_change('./云0B42KH.png',
-#                                     is_gauss_blur=False,
-#                                     is_gauss_noise=False)
+if __name__ == "__main__":
+    pp = plate_process()
+    # image = pp._read_image('./云0B42KH.png')
+    # # image = pp._change_light(image, 1.2)
+    # image = pp._hist_euqalize(image)
+    # # image = pp._gamma_corection(image)
+    # image = pp._move(image)
+    # image = pp._zoom(image)
+    # image = pp._scale(image)
+    # pp._show_image(image)
+    path = './云0B42KH.png',
+    image = cv2.imread(path)
+    image = pp.process_pic_with_shape_change(image)
+    pp._show_image(image)
+    # pp._save_image(image, '1.png', './')
 
-import concurrent.futures
-
-folder = '../../plate_dataset/license'
-save_folder = '../../plate_dataset/plate_process_image_with_block'
-
-
-def exec(name):
-    range_list = []
-    for j in range(6):
-        if random.random() < 0.5:
-            range_list.append(True)
-        else:
-            range_list.append(False)
-
-    path = os.path.join(folder, name)
-    image = pp.process_pic_with_shape_change2(path, range_list[0], range_list[1], range_list[2], range_list[3],
-                                             range_list[4], range_list[5])
-    # image = pp.process_pic_with_shape_change2(path)
-    pp.save_image(image, name, save_folder)
-    return path
-
-
-names = os.listdir(folder)
-with concurrent.futures.ThreadPoolExecutor(max_workers=50) as executor:
-    for i, p in enumerate(executor.map(exec, names)):
-        print(i, p)
+    # # batch process
+    # folder = '../../plate_dataset_new/license'
+    # save_folder = '../../plate_dataset_new/plate_image_resized'
+    #
+    # names = os.listdir(folder)
+    #
+    #
+    # def exec(name):
+    #     range_list = []
+    #     for j in range(7):
+    #         if random.random() < 0.5:
+    #             range_list.append(True)
+    #         else:
+    #             range_list.append(False)
+    #
+    #     path = os.path.join(folder, name)
+    #     image = cv2.imread(path)
+    #     image = pp.process_pic_with_shape_change(image, range_list[0], range_list[1], range_list[2], range_list[3],
+    #                                              range_list[4], range_list[5])
+    #     pp._save_image(image, name, save_folder)
+    #     return path, range_list
+    #
+    #
+    # with concurrent.futures.ThreadPoolExecutor(max_workers=80) as executor:
+    #     for i, (p, l) in enumerate(executor.map(exec, names)):
+    #         print(i, p, l)

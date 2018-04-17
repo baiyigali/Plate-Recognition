@@ -2,17 +2,219 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="14e31402-6477-436a-bf12-9ac7b40f6f1c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/data_process/create_plate_region.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/create_label_file.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/create_plate.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/label_name.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/plate_process.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/read_xml.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/datagenerator.py" afterPath="$PROJECT_DIR$/datagenerator.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/resnet_model.py" afterPath="$PROJECT_DIR$/resnet_model.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test.py" afterPath="$PROJECT_DIR$/test.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/train.py" afterPath="$PROJECT_DIR$/train.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/data_process/create_plate2.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/0.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/1.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/2.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/3.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/4.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/5.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/6.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/7.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/8.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/9.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/A.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/B.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/C.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/D.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/E.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/F.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/G.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/H.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/J.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/K.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/L.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/M.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/N.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/P.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/Q.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/R.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/S.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/T.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/U.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/V.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/W.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/X.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/Y.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/Z.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/云.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/京.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/冀.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/吉.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/宁.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/川.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/新.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/桂.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/沪.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/津.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/浙.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/渝.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/湘.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/琼.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/甘.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/皖.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/粤.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/苏.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/蒙.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/藏.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/豫.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/贵.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/赣.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/辽.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/鄂.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/闽.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/陕.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/青.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/鲁.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/黑.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/image/黔.jpg" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/path/mixed_image/test.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/path/mixed_image/train.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/path/mixed_image/valid.txt" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/debug.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/plate_train2.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/plate_train_yolo.py" />
+      <change beforePath="" afterPath="$PROJECT_DIR$/src/test.py" />
+      <change beforePath="$PROJECT_DIR$/.idea/Plate-Recognition.iml" afterPath="$PROJECT_DIR$/.idea/Plate-Recognition.iml" />
+      <change beforePath="$PROJECT_DIR$/.idea/Plate-Recognition.iml___jb_tmp___" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/data_process/create_label_file.py" afterPath="$PROJECT_DIR$/data_process/create_label_file.py" />
+      <change beforePath="$PROJECT_DIR$/data_process/create_plate.py" afterPath="$PROJECT_DIR$/data_process/create_plate.py" />
+      <change beforePath="$PROJECT_DIR$/data_process/label.py" afterPath="$PROJECT_DIR$/data_process/label.py" />
+      <change beforePath="$PROJECT_DIR$/data_process/plate_process.py" afterPath="$PROJECT_DIR$/data_process/plate_process.py" />
+      <change beforePath="$PROJECT_DIR$/data_process/read_xml.py" afterPath="$PROJECT_DIR$/data_process/read_xml.py" />
+      <change beforePath="$PROJECT_DIR$/datagenerator.py" afterPath="$PROJECT_DIR$/src/datagenerator.py" />
+      <change beforePath="$PROJECT_DIR$/debug.py" afterPath="$PROJECT_DIR$/src/plate_model_yolo.py" />
+      <change beforePath="$PROJECT_DIR$/gan/gan.py" afterPath="$PROJECT_DIR$/gan/gan.py" />
+      <change beforePath="$PROJECT_DIR$/image/0（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/1（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/2（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/3（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/4（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/5（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/6（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/7（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/8（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/9（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/A（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/B（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/C（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/D（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/E（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/F（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/G（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/H（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/J（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/K（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/L（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/M（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/N（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/P（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/Q（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/R（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/S（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/T（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/U（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/V（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/W（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/X（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/Y（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/Z（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/base_bg.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/云（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/京（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/冀（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/吉（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/宁（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/川（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/新（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/晋（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/桂（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/沪（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/津（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/浙（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/渝（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/湘.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/湘（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/琼（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/甘（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/皖（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/粤（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/苏（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/蒙（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/藏（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/豫（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/贵（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/赣（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌.psd" afterPath="$PROJECT_DIR$/image/车牌.psd" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0000_辽（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0001_辽.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0002_吉（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0003_吉.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0004_浙（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0005_浙.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0006_藏（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0007_藏.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0008_贵（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0009_贵.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0010_黔（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0011_黔.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0012_桂（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0013_桂.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0014_云（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0015_云.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0016_琼（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0017_琼.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0018_粤（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0019_粤.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0020_闽（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0021_闽.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0022_赣（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0023_赣.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0024_京（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0025_京.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0026_苏（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0027_苏.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0028_皖（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0029_皖.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0030_沪（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0031_沪.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0032_湘（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0033_湘.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0034_鲁（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0035_鲁.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0036_陕（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0037_陕.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0038_渝（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0039_渝.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0040_川（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0041_川.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0042_鄂（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0043_鄂.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0044_豫（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0045_豫.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0046_宁（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0047_宁.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0048_青（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/车牌_0049_青.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/辽（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/鄂（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/闽（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/陕（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/青（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/鲁（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/黑（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/image/黔（合并）.png" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/path/train.txt" afterPath="$PROJECT_DIR$/path/train.txt" />
+      <change beforePath="$PROJECT_DIR$/path/valid.txt" afterPath="$PROJECT_DIR$/path/valid.txt" />
+      <change beforePath="$PROJECT_DIR$/plate_denoise/denoise_model.py" afterPath="$PROJECT_DIR$/plate_denoise/denoise_model.py" />
+      <change beforePath="$PROJECT_DIR$/plate_denoise/denoise_train.py" afterPath="$PROJECT_DIR$/plate_denoise/denoise_train.py" />
+      <change beforePath="$PROJECT_DIR$/plate_model.py" afterPath="$PROJECT_DIR$/src/plate_model.py" />
+      <change beforePath="$PROJECT_DIR$/plate_test.py" afterPath="$PROJECT_DIR$/src/plate_test.py" />
+      <change beforePath="$PROJECT_DIR$/plate_train.py" afterPath="$PROJECT_DIR$/src/plate_train.py" />
+      <change beforePath="$PROJECT_DIR$/predict.py" afterPath="$PROJECT_DIR$/src/predict.py" />
+      <change beforePath="$PROJECT_DIR$/utils.py" afterPath="$PROJECT_DIR$/src/utils.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,82 +224,98 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/Plate_Recognition$read_xml.coverage" NAME="read_xml Coverage Results" MODIFIED="1520389548729" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Plate_Recognition$test.coverage" NAME="test Coverage Results" MODIFIED="1520409348075" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Plate_Recognition$plate_process.coverage" NAME="plate_process Coverage Results" MODIFIED="1520391758664" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Plate_Recognition$Nosetests_in_test_py.coverage" NAME="Nosetests in test.py Coverage Results" MODIFIED="1520303143958" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Plate_Recognition$create_plate_region.coverage" NAME="create_plate_region Coverage Results" MODIFIED="1520396646631" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
+    <SUITE FILE_PATH="coverage/Plate_Recognition$plate_train2.coverage" NAME="plate_train2 Coverage Results" MODIFIED="1523608881677" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/Plate_Recognition$test__1_.coverage" NAME="test (1) Coverage Results" MODIFIED="1523869125480" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
     <SUITE FILE_PATH="coverage/Plate_Recognition$plate_process__1_.coverage" NAME="plate_process (1) Coverage Results" MODIFIED="1520412083852" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
-    <SUITE FILE_PATH="coverage/Plate_Recognition$train.coverage" NAME="train Coverage Results" MODIFIED="1520388579105" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Plate_Recognition$read_xml__1_.coverage" NAME="read_xml (1) Coverage Results" MODIFIED="1520402797715" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
+    <SUITE FILE_PATH="coverage/Plate_Recognition$create_plate2.coverage" NAME="create_plate2 Coverage Results" MODIFIED="1523872299061" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
+    <SUITE FILE_PATH="coverage/Plate_Recognition$test.coverage" NAME="test Coverage Results" MODIFIED="1520409348075" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Plate_Recognition$Nosetests_in_test_py.coverage" NAME="Nosetests in test.py Coverage Results" MODIFIED="1520303143958" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Plate_Recognition$denoise_train.coverage" NAME="denoise_train Coverage Results" MODIFIED="1522134009681" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/plate_denoise" />
+    <SUITE FILE_PATH="coverage/Plate_Recognition$plate_train.coverage" NAME="plate_train Coverage Results" MODIFIED="1523843324000" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Plate_Recognition$plate_model_yolo.coverage" NAME="plate_model_yolo Coverage Results" MODIFIED="1523852549785" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/Plate_Recognition$gan.coverage" NAME="gan Coverage Results" MODIFIED="1522140925430" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/gan" />
+    <SUITE FILE_PATH="coverage/Plate_Recognition$predict.coverage" NAME="predict Coverage Results" MODIFIED="1523847609623" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/Plate_Recognition$datagenerator.coverage" NAME="datagenerator Coverage Results" MODIFIED="1520404008544" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Plate_Recognition$create_label_file.coverage" NAME="create_label_file Coverage Results" MODIFIED="1520403999073" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
+    <SUITE FILE_PATH="coverage/Plate_Recognition$denoise_model.coverage" NAME="denoise_model Coverage Results" MODIFIED="1522133549726" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/plate_denoise" />
+    <SUITE FILE_PATH="coverage/Plate_Recognition$plate_process.coverage" NAME="plate_process Coverage Results" MODIFIED="1523528172568" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
+    <SUITE FILE_PATH="coverage/Plate_Recognition$create_plate_region.coverage" NAME="create_plate_region Coverage Results" MODIFIED="1520396646631" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
+    <SUITE FILE_PATH="coverage/Plate_Recognition$read_xml__1_.coverage" NAME="read_xml (1) Coverage Results" MODIFIED="1520402797715" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
+    <SUITE FILE_PATH="coverage/Plate_Recognition$train.coverage" NAME="train Coverage Results" MODIFIED="1522058812416" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/plate_denoise" />
+    <SUITE FILE_PATH="coverage/Plate_Recognition$plate_model.coverage" NAME="plate_model Coverage Results" MODIFIED="1522137927751" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Plate_Recognition$create_plate.coverage" NAME="create_plate Coverage Results" MODIFIED="1523586153915" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/image" />
+    <SUITE FILE_PATH="coverage/Plate_Recognition$plate_test.coverage" NAME="plate_test Coverage Results" MODIFIED="1523586551362" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Plate_Recognition$create_label_file.coverage" NAME="create_label_file Coverage Results" MODIFIED="1523587567458" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
+    <SUITE FILE_PATH="coverage/Plate_Recognition$read_xml.coverage" NAME="read_xml Coverage Results" MODIFIED="1521008131535" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/data_process" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="train.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/train.py">
+      <file leaf-file-name="plate_train.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/plate_train.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="251" column="0" lean-forward="true" selection-start-line="251" selection-start-column="0" selection-end-line="251" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="resnet_model.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resnet_model.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="272" column="50" lean-forward="false" selection-start-line="272" selection-start-column="50" selection-end-line="272" selection-end-column="50" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="213">
-              <caret line="24" column="63" lean-forward="false" selection-start-line="24" selection-start-column="63" selection-end-line="24" selection-end-column="63" />
+            <state relative-caret-position="355">
+              <caret line="105" column="29" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="224" selection-end-column="73" />
               <folding>
-                <element signature="e#0#13#0" expanded="true" />
+                <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#4891#9113#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="read_xml.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data_process/read_xml.py">
+      <file leaf-file-name="plate_model.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/plate_model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="35" column="43" lean-forward="false" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="43" />
-              <folding>
-                <element signature="e#0#34#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="create_plate_region.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/data_process/create_plate_region.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="22" column="63" lean-forward="false" selection-start-line="22" selection-start-column="63" selection-end-line="22" selection-end-column="63" />
-              <folding>
-                <element signature="e#17#28#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="create_plate.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data_process/create_plate.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="209" column="23" lean-forward="true" selection-start-line="199" selection-start-column="4" selection-end-line="209" selection-end-column="23" />
+            <state relative-caret-position="357">
+              <caret line="24" column="60" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="plate_train2.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/plate_train2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1768">
+              <caret line="103" column="42" lean-forward="false" selection-start-line="103" selection-start-column="42" selection-end-line="103" selection-end-column="42" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="plate_train_yolo.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/plate_train_yolo.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="293">
+              <caret line="93" column="34" lean-forward="false" selection-start-line="93" selection-start-column="34" selection-end-line="93" selection-end-column="34" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#4622#6181#0" expanded="false" />
+                <element signature="e#6214#10436#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="plate_model_yolo.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/plate_model_yolo.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="398">
+              <caret line="109" column="16" lean-forward="true" selection-start-line="109" selection-start-column="16" selection-end-line="109" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="create_plate2.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/data_process/create_plate2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="137" column="19" lean-forward="false" selection-start-line="137" selection-start-column="19" selection-end-line="137" selection-end-column="19" />
+              <folding>
+                <element signature="e#17#31#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -105,22 +323,44 @@
       <file leaf-file-name="plate_process.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data_process/plate_process.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1140">
-              <caret line="208" column="28" lean-forward="false" selection-start-line="208" selection-start-column="28" selection-end-line="208" selection-end-column="28" />
+            <state relative-caret-position="263">
+              <caret line="363" column="49" lean-forward="false" selection-start-line="363" selection-start-column="49" selection-end-line="363" selection-end-column="49" />
               <folding>
-                <element signature="e#3316#6371#0" expanded="false" />
-                <element signature="e#6451#7155#0" expanded="false" />
-                <element signature="e#7225#7336#0" expanded="false" />
+                <element signature="e#4730#5017#0" expanded="false" />
+                <element signature="e#5052#5289#0" expanded="false" />
+                <element signature="e#5328#5615#0" expanded="false" />
+                <element signature="e#5649#5886#0" expanded="false" />
+                <element signature="e#5924#6211#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="create_label_file.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data_process/create_label_file.py">
+      <file leaf-file-name="test.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="75" column="55" lean-forward="false" selection-start-line="75" selection-start-column="55" selection-end-line="80" selection-end-column="57" />
+            <state relative-caret-position="84">
+              <caret line="4" column="12" lean-forward="true" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="predict.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/predict.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="75" column="58" lean-forward="false" selection-start-line="75" selection-start-column="58" selection-end-line="75" selection-end-column="58" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="label.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data_process/label.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="766">
+              <caret line="46" column="38" lean-forward="false" selection-start-line="46" selection-start-column="38" selection-end-line="46" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -137,17 +377,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>北</find>
-      <find>save_folder</find>
-      <find>val_file</find>
-      <find>save_path</find>
-      <find>i</find>
-      <find>scale_size</find>
-      <find>image_size</find>
       <find>logit</find>
       <find>output</find>
       <find>num_digit</find>
+      <find>self.</find>
+      <find>num_epoch</find>
+      <find>train_op</find>
+      <find>merge_summary</find>
+      <find>write_file</find>
+      <find>prin</find>
+      <find>save</find>
+      <find>concurrent</find>
+      <find>_zoom</find>
+      <find>_show_image</find>
+      <find>letter_char</find>
+      <find>CLASS_CHAR</find>
+      <find>self.images</find>
+      <find>bound_rows</find>
+      <find>plate_process</find>
+      <find>data_label</find>
+      <find>pr</find>
+      <find>futures</find>
+      <find>serial</find>
+      <find>batch</find>
+      <find>gray</find>
       <find>print</find>
+      <find>bg_path</find>
+      <find>_image_fusion</find>
+      <find>CHAR_COORD</find>
+      <find>batch_size</find>
+      <find>save_folder</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -161,16 +420,42 @@
         <option value="$PROJECT_DIR$/create_label_file.py" />
         <option value="$PROJECT_DIR$/read_xml.py" />
         <option value="$PROJECT_DIR$/plate_process.py" />
-        <option value="$PROJECT_DIR$/data_process/create_plate.py" />
-        <option value="$PROJECT_DIR$/data_process/read_xml.py" />
         <option value="$PROJECT_DIR$/data_process/label_name.xml" />
-        <option value="$PROJECT_DIR$/data_process/create_label_file.py" />
-        <option value="$PROJECT_DIR$/datagenerator.py" />
-        <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/resnet_model.py" />
-        <option value="$PROJECT_DIR$/train.py" />
-        <option value="$PROJECT_DIR$/data_process/plate_process.py" />
         <option value="$PROJECT_DIR$/data_process/create_plate_region.py" />
+        <option value="$PROJECT_DIR$/train.py" />
+        <option value="$PROJECT_DIR$/train_fcn.py" />
+        <option value="$PROJECT_DIR$/fcn_model2.py" />
+        <option value="$PROJECT_DIR$/tmp/platenet/checkpoints/checkpoint" />
+        <option value="$PROJECT_DIR$/plate_valid.py" />
+        <option value="$PROJECT_DIR$/plate_net/plate_test.py" />
+        <option value="$PROJECT_DIR$/data_process/create_plate.py" />
+        <option value="$PROJECT_DIR$/plate_denoise/datagenerator.py" />
+        <option value="$PROJECT_DIR$/plate_denoise/train.py" />
+        <option value="$PROJECT_DIR$/plate_denoise/denoise_model.py" />
+        <option value="$PROJECT_DIR$/plate_denoise/denoise_train.py" />
+        <option value="$PROJECT_DIR$/plate_model.py" />
+        <option value="$PROJECT_DIR$/gan/gan.py" />
+        <option value="$PROJECT_DIR$/data_process/image_process.py" />
+        <option value="$PROJECT_DIR$/datagenerator.py" />
+        <option value="$PROJECT_DIR$/image/create_plate.py" />
+        <option value="$PROJECT_DIR$/plate_test.py" />
+        <option value="$PROJECT_DIR$/data_process/create_label_file.py" />
+        <option value="$PROJECT_DIR$/predict.py" />
+        <option value="$PROJECT_DIR$/plate_train.py" />
+        <option value="$PROJECT_DIR$/data_process/read_xml.py" />
+        <option value="$PROJECT_DIR$/src/predict.py" />
+        <option value="$PROJECT_DIR$/data_process/label.py" />
+        <option value="$PROJECT_DIR$/src/plate_train2.py" />
+        <option value="$PROJECT_DIR$/path/mixed_image/train.txt" />
+        <option value="$PROJECT_DIR$/path/mixed_image/valid.txt" />
+        <option value="$PROJECT_DIR$/src/plate_train.py" />
+        <option value="$PROJECT_DIR$/src/plate_model_yolo.py" />
+        <option value="$PROJECT_DIR$/test.py" />
+        <option value="$PROJECT_DIR$/src/test.py" />
+        <option value="$PROJECT_DIR$/data_process/plate_process.py" />
+        <option value="$PROJECT_DIR$/src/plate_train_yolo.py" />
+        <option value="$PROJECT_DIR$/data_process/create_plate2.py" />
       </list>
     </option>
   </component>
@@ -181,10 +466,9 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1376" />
-    <option name="height" value="744" />
+    <option name="y" value="22" />
+    <option name="width" value="1920" />
+    <option name="height" value="1018" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -204,71 +488,57 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Plate-Recognition" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Plate-Recognition" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Plate-Recognition" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Plate-Recognition" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Plate-Recognition" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="path" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Plate-Recognition" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Plate-Recognition" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="data_process" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
+          <expand>
+            <path>
+              <item name="Plate-Recognition" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Plate-Recognition" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Plate-Recognition" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Plate-Recognition" type="462c0819:PsiDirectoryNode" />
+              <item name="data_process" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Plate-Recognition" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Plate-Recognition" type="462c0819:PsiDirectoryNode" />
+              <item name="path" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Plate-Recognition" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Plate-Recognition" type="462c0819:PsiDirectoryNode" />
+              <item name="plate_denoise" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Plate-Recognition" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Plate-Recognition" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/test.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/data_process" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/data_process" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/plate_net" />
       <recent name="E:\workspace\github\Plate-Recognition\plate_image" />
-      <recent name="E:\workspace\github\Plate-Recognition" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/path/mixed_image" />
+      <recent name="$PROJECT_DIR$/src" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -283,8 +553,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.plate_process (1)">
-    <configuration default="false" name="create_plate_region" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.create_plate2">
+    <configuration name="create_plate2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -297,13 +567,32 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Plate-Recognition" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_process/create_plate_region.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_process/create_plate2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
-      <method />
+      <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration default="false" name="datagenerator" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="plate_model_yolo" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="Plate-Recognition" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/plate_model_yolo.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+    </configuration>
+    <configuration name="plate_train" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -316,68 +605,68 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Plate-Recognition" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/datagenerator.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/plate_train.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
-      <method />
+      <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration default="false" name="read_xml (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="predict" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data_process" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Plate-Recognition" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_process/read_xml.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/predict.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
-      <method />
+      <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration default="false" name="create_label_file" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="test (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data_process" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Plate-Recognition" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_process/create_label_file.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
-      <method />
+      <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration default="false" name="plate_process (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/data_process" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="SDK_HOME" value="D:\Anaconda3\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="Plate-Recognition" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/data_process/plate_process.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
-      <method />
+      <option name="MODULE_MODE" value="false" />
     </configuration>
     <configuration default="true" type="DjangoTestsConfigurationType" factoryName="Django tests">
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -475,15 +764,6 @@
       <module name="Plate-Recognition" />
       <method />
     </configuration>
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <node-interpreter>project</node-interpreter>
-      <node-options />
-      <gulpfile />
-      <tasks />
-      <arguments />
-      <envs />
-      <method />
-    </configuration>
     <configuration default="true" type="js.build_tools.npm" factoryName="npm">
       <command value="run" />
       <scripts />
@@ -511,6 +791,14 @@
       <option name="USE_PATTERN" value="false" />
       <method />
     </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+    </configuration>
     <configuration default="true" type="tests" factoryName="Nosetests">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -526,42 +814,22 @@
       <option name="_new_additionalArguments" value="&quot;&quot;" />
       <option name="_new_target" value="&quot;.&quot;" />
       <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method />
-    </configuration>
-    <configuration default="false" name="test" type="PythonConfigurationType" factoryName="Python">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="D:\Anaconda3\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="Plate-Recognition" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Python.test" />
-      <item index="1" class="java.lang.String" itemvalue="Python.create_plate_region" />
-      <item index="2" class="java.lang.String" itemvalue="Python.datagenerator" />
-      <item index="3" class="java.lang.String" itemvalue="Python.read_xml (1)" />
-      <item index="4" class="java.lang.String" itemvalue="Python.create_label_file" />
-      <item index="5" class="java.lang.String" itemvalue="Python.plate_process (1)" />
+      <item index="1" class="java.lang.String" itemvalue="Python.plate_train" />
+      <item index="2" class="java.lang.String" itemvalue="Python.predict" />
+      <item index="3" class="java.lang.String" itemvalue="Python.create_plate2" />
+      <item index="4" class="java.lang.String" itemvalue="Python.plate_model_yolo" />
+      <item index="5" class="java.lang.String" itemvalue="Python.test (1)" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.plate_process (1)" />
-        <item index="1" class="java.lang.String" itemvalue="Python.datagenerator" />
-        <item index="2" class="java.lang.String" itemvalue="Python.create_label_file" />
-        <item index="3" class="java.lang.String" itemvalue="Python.read_xml (1)" />
-        <item index="4" class="java.lang.String" itemvalue="Python.create_plate_region" />
+        <item index="0" class="java.lang.String" itemvalue="Python.create_plate2" />
+        <item index="1" class="java.lang.String" itemvalue="Python.test (1)" />
+        <item index="2" class="java.lang.String" itemvalue="Python.plate_model_yolo" />
+        <item index="3" class="java.lang.String" itemvalue="Python.predict" />
+        <item index="4" class="java.lang.String" itemvalue="Python.plate_train" />
       </list>
     </recent_temporary>
   </component>
@@ -587,289 +855,418 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1376" height="744" extended-state="6" />
+    <frame x="0" y="22" width="1920" height="1018" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.097058825" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3769716" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35326087" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.11448349" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2522686" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39905363" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39782608" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28695652" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14962727" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="SciView" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2522686" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39782608" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="processedProjectFiles" value="true" />
+    <option name="version" value="1" />
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/plate_process.py">
+    <entry file="file://$PROJECT_DIR$/tmp/platenet/checkpoints/checkpoint" />
+    <entry file="file://$PROJECT_DIR$/fcn_model.py" />
+    <entry file="file://$PROJECT_DIR$/../../../env/lib/python3.6/os.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="184">
+          <caret line="219" column="0" lean-forward="false" selection-start-line="219" selection-start-column="0" selection-end-line="219" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/plate_process.py">
+    <entry file="file://$PROJECT_DIR$/data_process/create_plate.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="3003">
+          <caret line="143" column="41" lean-forward="false" selection-start-line="143" selection-start-column="41" selection-end-line="143" selection-end-column="41" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/label_name.xml">
+    <entry file="file://$PROJECT_DIR$/../../../env/lib/python3.6/site-packages/tensorflow/python/training/adam.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1890">
-          <caret line="90" column="21" lean-forward="false" selection-start-line="90" selection-start-column="19" selection-end-line="90" selection-end-column="21" />
-          <folding />
+        <state relative-caret-position="182">
+          <caret line="37" column="6" lean-forward="false" selection-start-line="37" selection-start-column="6" selection-end-line="37" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/read_xml.py">
+    <entry file="file://$PROJECT_DIR$/../../../env/lib/python3.6/site-packages/tensorflow/python/training/momentum.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="20" lean-forward="false" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plate_process.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5313">
-          <caret line="253" column="27" lean-forward="false" selection-start-line="253" selection-start-column="27" selection-end-line="253" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/车牌label.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2525">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/WeChat Files/XiaoBotianxie/Files/label_names.xml" />
-    <entry file="file://$USER_HOME$/.PyCharm2017.1/system/python_stubs/-2036615904/cv2/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="6169" column="18" lean-forward="true" selection-start-line="6169" selection-start-column="18" selection-end-line="6169" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/car_image/1520227602.4019845.jpg" />
-    <entry file="file://D:/Anaconda3/Lib/genericpath.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://D:/Anaconda3/Lib/ntpath.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="74" column="0" lean-forward="false" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plate_process_image/1.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plate_process_image/0.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/file_label2.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1512">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/file_label.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/path/valid.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-236869">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/create_label_file.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="75" column="51" lean-forward="false" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/label_name.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="81" column="54" lean-forward="true" selection-start-line="81" selection-start-column="54" selection-end-line="81" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/create_plate.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="48" column="4" lean-forward="false" selection-start-line="48" selection-start-column="4" selection-end-line="48" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/plate_process.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="262" column="33" lean-forward="true" selection-start-line="262" selection-start-column="33" selection-end-line="262" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/read_xml.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="43" column="81" lean-forward="false" selection-start-line="43" selection-start-column="81" selection-end-line="43" selection-end-column="81" />
-          <folding />
+        <state relative-caret-position="182">
+          <caret line="43" column="6" lean-forward="false" selection-start-line="43" selection-start-column="6" selection-end-line="43" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/path/train.txt">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="101005" column="0" lean-forward="false" selection-start-line="101005" selection-start-column="0" selection-end-line="101005" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/path/plate_process_image_without_shape/train.txt" />
+    <entry file="file://$PROJECT_DIR$/path/plate_process_image_with_shear/train.txt" />
+    <entry file="file://$PROJECT_DIR$/../../../env/lib/python3.6/site-packages/tensorflow/python/training/saver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="569">
+          <caret line="1138" column="0" lean-forward="false" selection-start-line="1138" selection-start-column="0" selection-end-line="1138" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/train.py" />
+    <entry file="file://$PROJECT_DIR$/plate_denoise/train.py" />
+    <entry file="file://$PROJECT_DIR$/../../../env/lib/python3.6/site-packages/tensorflow/python/ops/math_ops.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4">
+          <caret line="1313" column="26" lean-forward="false" selection-start-line="1313" selection-start-column="26" selection-end-line="1313" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plate_denoise/datagenerator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="21">
+          <caret line="9" column="54" lean-forward="false" selection-start-line="9" selection-start-column="54" selection-end-line="9" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data_process/image_process.py" />
+    <entry file="file://$PROJECT_DIR$/../../../env/lib/python3.6/concurrent/futures/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plate_denoise/denoise_train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="672">
+          <caret line="32" column="54" lean-forward="false" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../env/lib/python3.6/site-packages/numpy/random/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="211">
+          <caret line="101" column="7" lean-forward="false" selection-start-line="101" selection-start-column="7" selection-end-line="101" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/image/1.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data_process/1.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../env/lib/python3.6/random.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-693">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2017.3/system/python_stubs/2113585804/cv2/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="188">
+          <caret line="1995" column="4" lean-forward="false" selection-start-line="1995" selection-start-column="4" selection-end-line="1995" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data_process/create_label_file.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="92" column="39" lean-forward="false" selection-start-line="92" selection-start-column="39" selection-end-line="92" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/path/resized_image/train.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="139991" column="82" lean-forward="false" selection-start-line="139991" selection-start-column="82" selection-end-line="139991" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/plate_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="140" column="39" lean-forward="false" selection-start-line="140" selection-start-column="39" selection-end-line="140" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data_process/read_xml.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="33" lean-forward="false" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#34#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../env/lib/python3.6/concurrent/futures/process.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="367" column="8" lean-forward="false" selection-start-line="367" selection-start-column="8" selection-end-line="367" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/path/license/train.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="412">
+          <caret line="82487" column="0" lean-forward="false" selection-start-line="82487" selection-start-column="0" selection-end-line="82487" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/path/test.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13">
+          <caret line="43468" column="36" lean-forward="false" selection-start-line="43468" selection-start-column="23" selection-end-line="43468" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/path/resized_image/test.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="40" lean-forward="false" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/path/license/test.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="23551" column="50" lean-forward="false" selection-start-line="23551" selection-start-column="50" selection-end-line="23551" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gan/gan.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/plate_denoise/denoise_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1050">
+          <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/path/mixed_image/train.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1076">
+          <caret line="241004" column="0" lean-forward="true" selection-start-line="241004" selection-start-column="0" selection-end-line="241004" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/path/plate_process_image/train.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="14" column="47" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="101004" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/path/mixed_image/test.txt">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data_process/label_name.xml">
+    <entry file="file://$PROJECT_DIR$/path/plate_process_image/valid.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="84" column="61" lean-forward="true" selection-start-line="84" selection-start-column="61" selection-end-line="90" selection-end-column="61" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="16835" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/datagenerator.py">
+    <entry file="file://$PROJECT_DIR$/path/mixed_image/valid.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="117" column="34" lean-forward="false" selection-start-line="117" selection-start-column="34" selection-end-line="121" selection-end-column="26" />
+        <state relative-caret-position="568">
+          <caret line="36835" column="0" lean-forward="true" selection-start-line="36835" selection-start-column="0" selection-end-line="36835" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/datagenerator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="35" column="38" lean-forward="false" selection-start-line="31" selection-start-column="12" selection-end-line="36" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data_process/label.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="766">
+          <caret line="46" column="38" lean-forward="false" selection-start-line="46" selection-start-column="38" selection-end-line="46" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/predict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="75" column="58" lean-forward="false" selection-start-line="75" selection-start-column="58" selection-end-line="75" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/plate_model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="24" column="60" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="60" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../env/lib/python3.6/site-packages/tensorflow/contrib/layers/python/layers/layers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="1185" column="23" lean-forward="false" selection-start-line="1185" selection-start-column="12" selection-end-line="1185" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/plate_train.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="105" column="29" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="224" selection-end-column="73" />
           <folding>
-            <element signature="e#17#35#0" expanded="false" />
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#4891#9113#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data_process/create_label_file.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="75" column="55" lean-forward="false" selection-start-line="75" selection-start-column="55" selection-end-line="80" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="24" column="63" lean-forward="false" selection-start-line="24" selection-start-column="63" selection-end-line="24" selection-end-column="63" />
+        <state relative-caret-position="63">
+          <caret line="3" column="10" lean-forward="true" selection-start-line="3" selection-start-column="10" selection-end-line="3" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" column="12" lean-forward="true" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/plate_train2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1768">
+          <caret line="103" column="42" lean-forward="false" selection-start-line="103" selection-start-column="42" selection-end-line="103" selection-end-column="42" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resnet_model.py">
+    <entry file="file://$PROJECT_DIR$/src/plate_model_yolo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="272" column="50" lean-forward="false" selection-start-line="272" selection-start-column="50" selection-end-line="272" selection-end-column="50" />
+        <state relative-caret-position="398">
+          <caret line="109" column="16" lean-forward="true" selection-start-line="109" selection-start-column="16" selection-end-line="109" selection-end-column="16" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/train.py">
+    <entry file="file://$PROJECT_DIR$/src/plate_train_yolo.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="251" column="0" lean-forward="true" selection-start-line="251" selection-start-column="0" selection-end-line="251" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data_process/read_xml.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="35" column="43" lean-forward="false" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="43" />
+        <state relative-caret-position="293">
+          <caret line="93" column="34" lean-forward="false" selection-start-line="93" selection-start-column="34" selection-end-line="93" selection-end-column="34" />
           <folding>
-            <element signature="e#0#34#0" expanded="true" />
+            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#4622#6181#0" expanded="false" />
+            <element signature="e#6214#10436#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data_process/plate_process.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1140">
-          <caret line="208" column="28" lean-forward="false" selection-start-line="208" selection-start-column="28" selection-end-line="208" selection-end-column="28" />
+        <state relative-caret-position="263">
+          <caret line="363" column="49" lean-forward="false" selection-start-line="363" selection-start-column="49" selection-end-line="363" selection-end-column="49" />
           <folding>
-            <element signature="e#3316#6371#0" expanded="false" />
-            <element signature="e#6451#7155#0" expanded="false" />
-            <element signature="e#7225#7336#0" expanded="false" />
+            <element signature="e#4730#5017#0" expanded="false" />
+            <element signature="e#5052#5289#0" expanded="false" />
+            <element signature="e#5328#5615#0" expanded="false" />
+            <element signature="e#5649#5886#0" expanded="false" />
+            <element signature="e#5924#6211#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data_process/create_plate.py">
+    <entry file="file://$PROJECT_DIR$/data_process/create_plate2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="209" column="23" lean-forward="true" selection-start-line="199" selection-start-column="4" selection-end-line="209" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data_process/create_plate_region.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="22" column="63" lean-forward="false" selection-start-line="22" selection-start-column="63" selection-end-line="22" selection-end-column="63" />
+        <state relative-caret-position="272">
+          <caret line="137" column="19" lean-forward="false" selection-start-line="137" selection-start-column="19" selection-end-line="137" selection-end-column="19" />
           <folding>
-            <element signature="e#17#28#0" expanded="true" />
+            <element signature="e#17#31#0" expanded="true" />
           </folding>
         </state>
       </provider>

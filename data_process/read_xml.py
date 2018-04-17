@@ -41,6 +41,12 @@ class read_xml():
             plate_char.append(data_label.class_char[l])
         return ''.join(plate_char)
 
+    def serial2label(self, serial):
+        label = np.zeros([1, self.num_digit, self.num_classes])
+        for i, s in enumerate(serial):
+            label[0, i, s] = 1
+        return label
+
 # rx = read_xml(batch_size=1, num_digit=8, num_classes=65)
 # # label_dict, str_dict = rx.read_file('./label_name.xml')
 # # # print(label_dict)

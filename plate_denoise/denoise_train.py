@@ -1,11 +1,11 @@
 import tensorflow as tf
 import os
 from plate_denoise import denoise_model
-import time
 from datetime import datetime
 import numpy as np
 from plate_denoise.datagenerator import ImageDataGenerator
-import utils
+from src import utils
+
 
 class ae_train():
     def __init__(self, image_size, num_epochs, batch_sizes, learning_rate, train_file, filewriter_path, checkpoint_path,
