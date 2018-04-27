@@ -124,77 +124,77 @@ class plate():
 
 if __name__ == "__main__":
 
-    # process = plate_process.plate_process()
-    # plate = plate()
-    # # # # bg = cv2.imread('./image/base_bg1.jpg')
-    # # # # logo = cv2.imread('./image/1.jpg')
-    # # # # plate._image_fusion(bg, logo, 0, 0)
-    # # #
-    # serial = plate.create_random_serial()
-    # # # print(serial)
-    # # # serial = [0, 41, 44, 39, 32, 37, 34, 39]
-    # plate_image, coords = plate.create_plate(serial)
-    # plate_image, coords = process.process_pic_with_shape_change(plate_image, coords)
-    # # print(coords)
-    # plate.draw_box(plate_image, coords)
-    # plate.imshow(plate_image)
-
-    # ====batch create plate===
-    save_folder = '../../plate_dataset_new/records'
-    if not os.path.exists(save_folder):
-        os.makedirs(save_folder)
-
-    plate = plate()
     process = plate_process.plate_process()
+    plate = plate()
+    # # # bg = cv2.imread('./image/base_bg1.jpg')
+    # # # logo = cv2.imread('./image/1.jpg')
+    # # # plate._image_fusion(bg, logo, 0, 0)
+    # #
+    serial = plate.create_random_serial()
+    # # print(serial)
+    serial = [19, 42, 46, 32, 32, 40, 37, 37]
+    plate_image, coords = plate.create_plate(serial)
+    # plate.imshow(plate_image)
+    plate_image, coords = process.process_pic_with_shape_change(plate_image, coords)
+    # plate.draw_box(plate_image, coords)
+    plate.imshow(plate_image)
 
-    serial_list = []
-    for i in range(20000):
-        serial_list.append(plate.create_random_serial())
-
-
-    def main(serial):
-        plate_image, coords = plate.create_plate(serial)
-        plate_image, coords = process.process_pic_with_shape_change(plate_image, coords)
-        # name = plate.serial2str(serial)
-        # image_path = os.path.join(save_folder, name)
-        labels = np.array(serial)
-        info_dict = {
-            'coords': coords,
-            # 'image_path': image_path,
-            'labels': labels,
-        }
-        return plate_image, info_dict
-        # plate.imshow(plate_image)
-
-
-    record_file_num = 0
-    train_file_num = 0
-    valid_file_num = 0
-    with concurrent.futures.ThreadPoolExecutor(max_workers=80) as executor:
-        for i, (image, info_dict) in enumerate(executor.map(main, serial_list)):
-            if i % 1000 == 0:
-                if i < 17000:
-                    file_name = ('train.tfrecords-plate-%.4d' % (record_file_num))
-                    writer = tf.python_io.TFRecordWriter(os.path.join(save_folder, file_name))
-                else:
-                    file_name = ('valid.tfrecords-plate-%.4d' % (record_file_num))
-                    writer = tf.python_io.TFRecordWriter(os.path.join(save_folder, file_name))
-                record_file_num += 1
-            image_raw = image.tobytes()
-            coords = info_dict['coords']
-            labels = info_dict['labels']
-            coords_raw = coords.tobytes()
-            labels_raw = labels.tobytes()
-            example = tf.train.Example(
-                features=tf.train.Features(
-                    feature={
-                        'image_raw': tf.train.Feature(bytes_list=tf.train.BytesList(value=[image_raw])),
-                        'coords': tf.train.Feature(bytes_list=tf.train.BytesList(value=[coords_raw])),
-                        'labels': tf.train.Feature(bytes_list=tf.train.BytesList(value=[labels_raw]))
-                    }
-                )
-            )
-            # print(type(image), type(image[0][0][0]), image.shape, type(coords[1][0]))
-            print(i)
-            writer.write(example.SerializeToString())
-        writer.close()
+    # # ====batch create plate===
+    # save_folder = '../../plate_dataset_new/records_without_block'
+    # if not os.path.exists(save_folder):
+    #     os.makedirs(save_folder)
+    #
+    # plate = plate()
+    # process = plate_process.plate_process()
+    #
+    # serial_list = []
+    # for i in range(200000):
+    #     serial_list.append(plate.create_random_serial())
+    #
+    #
+    # def main(serial):
+    #     plate_image, coords = plate.create_plate(serial)
+    #     plate_image, coords = process.process_pic_with_shape_change(plate_image, coords)
+    #     # name = plate.serial2str(serial)
+    #     # image_path = os.path.join(save_folder, name)
+    #     labels = np.array(serial)
+    #     info_dict = {
+    #         'coords': coords,
+    #         # 'image_path': image_path,
+    #         'labels': labels,
+    #     }
+    #     return plate_image, info_dict
+    #     # plate.imshow(plate_image)
+    #
+    #
+    # record_file_num = 0
+    # train_file_num = 0
+    # valid_file_num = 0
+    # with concurrent.futures.ThreadPoolExecutor(max_workers=80) as executor:
+    #     for i, (image, info_dict) in enumerate(executor.map(main, serial_list)):
+    #         if i % 1000 == 0:
+    #             if i < 170000:
+    #                 file_name = ('train.tfrecords-plate-%.4d' % (record_file_num))
+    #                 writer = tf.python_io.TFRecordWriter(os.path.join(save_folder, file_name))
+    #             else:
+    #                 file_name = ('valid.tfrecords-plate-%.4d' % (record_file_num))
+    #                 writer = tf.python_io.TFRecordWriter(os.path.join(save_folder, file_name))
+    #             record_file_num += 1
+    #         image_raw = image.tobytes()
+    #         coords = info_dict['coords']
+    #         labels = info_dict['labels']
+    #         coords_raw = coords.tobytes()
+    #         labels_raw = labels.tobytes()
+    #         example = tf.train.Example(
+    #             features=tf.train.Features(
+    #                 feature={
+    #                     'image_raw': tf.train.Feature(bytes_list=tf.train.BytesList(value=[image_raw])),
+    #                     'coords': tf.train.Feature(bytes_list=tf.train.BytesList(value=[coords_raw])),
+    #                     'labels': tf.train.Feature(bytes_list=tf.train.BytesList(value=[labels_raw]))
+    #                 }
+    #             )
+    #         )
+    #         # print(type(image), type(image[0][0][0]), image.shape, type(coords[1][0]))
+    #         print(i)
+    #         writer.write(example.SerializeToString())
+    #     writer.close()

@@ -8,9 +8,7 @@ import numpy as np
 import tensorflow as tf
 from datetime import datetime
 from src import plate_model_yolo
-from src.datagenerator import ImageDataGenerator
 from src.utils import mkdirs, deldirs
-from data_process import create_plate2, plate_process, read_xml
 import cv2
 
 PROJECT_PATH = '/home1/fsb/project/LPR/Plate-Recognition'
@@ -18,17 +16,17 @@ PROJECT_PATH = '/home1/fsb/project/LPR/Plate-Recognition'
 
 class plateNet_train(object):
     def __init__(self, image_size, num_epoch, batch_size, learning_rate,
-                 num_digit, num_classes, train_file, valid_file, filewriter_path, checkpoint_path,
+                 num_digit, num_classes, filewriter_path, checkpoint_path,
                  relu_leakiness=0.1, is_restore=True, restore_path=None, device_id='2'):
         self.image_size = image_size
         self.num_epoch = num_epoch
         self.batch_size = batch_size
+        self.train_batches_per_epoch = int(170000 / self.batch_size)
+        self.valid_batches_per_epoch = int(30000 / self.batch_size)
         self.learning_rate = learning_rate
         self.num_digit = num_digit
         self.num_classes = num_classes
         self.display_step = 20
-        self.train_file = train_file
-        self.valid_file = valid_file
         self.filewriter_path = filewriter_path
         deldirs(self.filewriter_path)
         mkdirs(self.filewriter_path)
@@ -45,7 +43,7 @@ class plateNet_train(object):
             self.restore_checkpoint = None
         os.environ['CUDA_VISIBLE_DEVICES'] = device_id
 
-        # self.init_model()
+        self.init_model()
 
     def init_model(self):
         self.x = tf.placeholder(tf.float32, [None, self.image_size[0], self.image_size[1], 3], name='input')
@@ -55,13 +53,8 @@ class plateNet_train(object):
         self.predict = self.model.network_model()
         self.accuracy = self.model.class_accuracy(self.predict, self.y)
         self.loss = self.model.loss(self.predict, self.y)
-        self.total_loss = tf.losses.get_losses()
         self.train_op = self.optimize_model()
         self.merge_summary = tf.summary.merge_all()
-
-    def get_variable_list(self):
-        self.variable_list = [v for v in tf.trainable_variables()]
-        return self.variable_list
 
     def optimize_model(self):
         self.variable_list = [v for v in tf.trainable_variables()]
@@ -71,12 +64,6 @@ class plateNet_train(object):
             optimizer = tf.train.MomentumOptimizer(self.learning_rate, momentum=0.9)
             train_op = optimizer.apply_gradients(gradients)
         return train_op
-
-    def create_date(self):
-        return ImageDataGenerator(self.train_file, scale_size=self.image_size, num_digit=self.num_digit,
-                                  num_classes=self.num_classes), \
-               ImageDataGenerator(self.valid_file, scale_size=self.image_size, num_digit=self.num_digit,
-                                  num_classes=self.num_classes)
 
     def read_and_decode(self, filenames):
         """ Return tensor to read from TFRecord """
@@ -97,14 +84,18 @@ class plateNet_train(object):
         image = tf.cast(image, tf.float64)
 
         label = tf.decode_raw(features['labels'], tf.int64)
-        label = tf.reshape(label, [8,])
+        label = tf.reshape(label, [8, ])
         label = tf.one_hot(label, self.num_classes, 1, 0)
         label = tf.cast(label, tf.float64)
-        #
+
         coord = tf.decode_raw(features['coords'], tf.float64)
         coord = tf.reshape(coord, [8, 4])
         coord = tf.cast(coord, tf.float64)
-        return image, label, coord
+
+        images, labels, coords = tf.train.shuffle_batch([image, label, coord], batch_size=self.batch_size,
+                                                        capacity=2000,
+                                                        min_after_dequeue=1000)
+        return images, labels, coords
 
     def write_records(self, file_path, record_folder, record_scope):
         if not os.path.exists(record_folder):
@@ -145,15 +136,20 @@ class plateNet_train(object):
         self.writer = tf.summary.FileWriter(self.filewriter_path)
         self.saver = tf.train.Saver()
 
-        images, labels, coords = pt.read_and_decode("../../plate_dataset_new/records/train.tfrecords-plate-*")
-        image, label, coord = tf.train.shuffle_batch([images, labels, coords], batch_size=32, capacity=128,
-                                                     min_after_dequeue=64)
+        train_images, train_labels, train_coords = pt.read_and_decode(
+            "../../plate_dataset_new/records/train.tfrecords-plate-*")
+        valid_images, valid_labels, valid_coords = pt.read_and_decode(
+            "../../plate_dataset_new/records/valid.tfrecords-plate-*")
         with tf.Session(config=tf.ConfigProto(allow_soft_placement=True, log_device_placement=True)) as sess:
-            sess.run(tf.global_variables_initializer())
+            init = (tf.global_variables_initializer(), tf.local_variables_initializer())
+            sess.run(init)
             self.writer.add_graph(sess.graph)
             # if restore_checkponit is '' use ariginal weights, else use checkponit
             if self.restore_checkpoint is not None:
                 self.saver.restore(sess, self.restore_checkpoint)
+
+            coordinator = tf.train.Coordinator()
+            threads = tf.train.start_queue_runners(sess=sess, coord=coordinator)
 
             print("{} Start training...".format(datetime.now()))
             print("{} Open Tensorboard :tensorboard --logdir {} --host localhost --port 6066".format(datetime.now(),
@@ -161,37 +157,38 @@ class plateNet_train(object):
             # Loop over number of epochs
             for epoch in range(self.num_epoch):
                 print("Epoch number: {}/{}".format(epoch + 1, self.num_epoch))
-                step = 1
-                while step < train_batches_per_epoch:
-
-                    batch_xs, batch_ys = train_generator.next_batch(self.batch_size)
-                    # print(batch_xs.shape)
-                    feed_dict = {self.x: batch_xs, self.y: batch_ys}
+                for step in range(self.train_batches_per_epoch):
+                    image_batch, label_batch, coord_batch = sess.run([train_images, train_labels, train_coords])
+                    print(image_batch.shape)
+                    label_batch = np.concatenate(
+                        [np.ones((self.batch_size, self.num_digit, 1)), coord_batch, label_batch], axis=2)
+                    # print(image_batch.shape, label_batch.shape)
+                    feed_dict = {self.x: image_batch, self.y: label_batch}
 
                     sess.run(self.train_op, feed_dict=feed_dict)
+                    # print("Iter {}/{}".format(step * self.batch_size, self.train_batches_per_epoch * self.batch_size))
 
-                    # Generate summary with the current batch of data and write to file
                     if step % self.display_step == 0:
                         loss, acc, s = sess.run([self.loss, self.accuracy, self.merge_summary], feed_dict=feed_dict)
-                        self.writer.add_summary(s, epoch * train_batches_per_epoch + step)
+                        self.writer.add_summary(s, epoch * self.train_batches_per_epoch + step)
                         print("Iter {}/{}, training mini-batch loss = {:.5f}, training accuracy = {:.5f}".format(
-                            step * self.batch_size, train_batches_per_epoch * self.batch_size, loss, acc))
-
-                    step += 1
-                train_generator.reset_pointer()
+                            step * self.batch_size, self.train_batches_per_epoch * self.batch_size, loss, acc))
 
                 # Validate the model on the entire validation set
                 print("{} Start validation, valid num batches: {}, total num: {}".format(datetime.now(),
-                                                                                         val_batches_per_epoch,
-                                                                                         val_batches_per_epoch * self.batch_size))
+                                                                                         self.valid_batches_per_epoch,
+                                                                                         self.valid_batches_per_epoch * self.batch_size))
                 v_loss = 0.
                 v_acc = 0.
                 count = 0
                 t1 = time.time()
-                for i in range(val_batches_per_epoch):
-                    batch_validx, batch_validy = val_generator.next_batch(self.batch_size)
+                for i in range(self.valid_batches_per_epoch):
+                    image_batch, label_batch, coord_batch = sess.run([valid_images, valid_labels, valid_coords])
+                    label_batch = np.concatenate(
+                        [np.ones((self.batch_size, self.num_digit, 1)), coord_batch, label_batch], axis=2)
+                    feed_dict = {self.x: image_batch, self.y: label_batch}
                     valid_loss, valid_acc, valid_out = sess.run([self.loss, self.accuracy, self.predict],
-                                                                feed_dict={self.x: batch_validx, self.y: batch_validy})
+                                                                feed_dict=feed_dict)
 
                     v_loss += valid_loss
                     v_acc += valid_acc
@@ -201,10 +198,8 @@ class plateNet_train(object):
                 v_acc /= count
                 t2 = time.time() - t1
                 print("Validation loss = {:.4f}, acc = {:.4f}".format(v_loss, v_acc))
-                print("Test image {:.4f}ms per image".format(t2 * 1000 / (val_batches_per_epoch * self.batch_size)))
-
-                # Reset the file pointer of the image data generator
-                val_generator.reset_pointer()
+                print("Test image {:.4f}ms per image".format(
+                    t2 * 1000 / (self.valid_batches_per_epoch * self.batch_size)))
 
                 print("{} Saving checkpoint of model...".format(datetime.now()))
                 # save checkpoint of the model
@@ -215,34 +210,28 @@ class plateNet_train(object):
 
 
 if __name__ == '__main__':
-    train_file = "./path/plate_process_image/train.txt"
-    valid_file = "./path/plate_process_image/valid.txt"
-    pt = plateNet_train(image_size=(31, 94),
-                        num_epoch=5,
-                        batch_size=64,
+    pt = plateNet_train(image_size=(30, 100),
+                        num_epoch=20,
+                        batch_size=256,
                         learning_rate=0.001,
                         num_digit=8,
                         num_classes=65,
-                        train_file=train_file,
-                        valid_file=valid_file,
-                        filewriter_path=os.path.join(PROJECT_PATH, "./tmp/platenet/tensorboard"),
-                        checkpoint_path=os.path.join(PROJECT_PATH, "./tmp/platenet/process_checkpoints"),
+                        filewriter_path=os.path.join(PROJECT_PATH, "/tmp/yolo/tensorboard"),
+                        checkpoint_path=os.path.join(PROJECT_PATH, "/tmp/yolo/process_checkpoints"),
                         relu_leakiness=0.1,
-                        is_restore=True,
-                        restore_path=os.path.join(PROJECT_PATH, './tmp/platenet/resized_checkpoints'),
-                        device_id='2,3'
+                        is_restore=False,
+                        restore_path=os.path.join(PROJECT_PATH, '/tmp/yolo/process_checkpoints'),
+                        device_id='0'
                         )
-    # pt.train()
-    # pt.write_records(train_file, './records', 'train.tfrecords-process-')
-    # pt.read_and_decode("../../plate_dataset_new/records/train.tfrecords-plate-*")
+    pt.train()
 
-    images, labels, coords = pt.read_and_decode("../../plate_dataset_new/records/train.tfrecords-plate-*")
-    image, label, coord = tf.train.shuffle_batch([images, labels, coords], batch_size=32, capacity=128, min_after_dequeue=64)
-    with tf.Session() as sess:
-        init = (tf.global_variables_initializer(), tf.local_variables_initializer())
-        sess.run(init)
-        coordinator = tf.train.Coordinator()
-        threads = tf.train.start_queue_runners(sess=sess, coord=coordinator)
-        image_batch, label_batch, coord_batch = sess.run([image, label, coord])
-        label = np.concatenate([np.ones((32, 8, 1)), coord_batch, label_batch], axis=2)
-        print(image_batch.shape, label_batch.shape, coord.shape, label.shape)
+    # images, labels, coords = pt.read_and_decode("../../plate_dataset_new/records/train.tfrecords-plate-*")
+    # with tf.Session() as sess:
+    #     init = (tf.global_variables_initializer(), tf.local_variables_initializer())
+    #     sess.run(init)
+    #     coordinator = tf.train.Coordinator()
+    #     threads = tf.train.start_queue_runners(sess=sess, coord=coordinator)
+    #     for i in range(10):
+    #         image_batch, label_batch, coord_batch = sess.run([images, labels, coords])
+    #         print(image_batch.shape, label_batch.shape, coord_batch.shape)
+    # label = np.concatenate([np.ones((32, 8, 1)), coord_batch, label_batch], axis=2)

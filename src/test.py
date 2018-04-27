@@ -2,10 +2,7 @@ import tensorflow as tf
 from  tensorflow.examples.tutorials.mnist import input_data
 import numpy as np
 
-def _int_64_feature(value):
-    return tf.train.Features(int64_list=tf.train.Int64List(value=[value]))
-
-def _bytes_feature(value):
-    return tf.train.Features(bytes_list=tf.train.BytesList(value=[value]))
-
-mnist = input_data.read_data_sets("./")
+a = np.array([[1, 2], [3, 4]])
+b = tf.one_hot(a, 4, axis=2)
+with tf.Session() as sess:
+    print(sess.run(b))

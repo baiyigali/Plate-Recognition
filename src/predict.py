@@ -22,23 +22,21 @@ class plate_predict():
         os.environ['CUDA_VISIBLE_DEVICES'] = device_id
         os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
-
     def get_data(self, path):
-        img = cv2.imread(path).astype('float32')
+        img = cv2.imread(path).astype('float64')
         img -= self.mean
         img = cv2.resize(img, (self.image_size[1], self.image_size[0]))
         img = img.reshape((1, self.image_size[0], self.image_size[1], 3))
         return img
 
-
     def read_var_name(self):
         from tensorflow.python import pywrap_tensorflow
         ckpt = tf.train.get_checkpoint_state(self.checkpoint_path)
+        print(ckpt.model_checkpoint_path)
         reader = pywrap_tensorflow.NewCheckpointReader(ckpt.model_checkpoint_path)
         var_to_shape_map = reader.get_variable_to_shape_map()
         for key in var_to_shape_map:
             print("tensor name: {}".format(key))
-
 
     def predict(self, path):
         img = self.get_data(path)
@@ -48,6 +46,7 @@ class plate_predict():
             new_saver = tf.train.import_meta_graph(ckpt.model_checkpoint_path + '.meta')
             if ckpt and ckpt.model_checkpoint_path:
                 # print(ckpt, ckpt.model_checkpoint_path)
+                print(ckpt.model_checkpoint_path)
                 new_saver.restore(sess, ckpt.model_checkpoint_path)
                 graph = tf.get_default_graph()
                 # keys = sess.graph.get_operations()
@@ -71,17 +70,19 @@ if __name__ == '__main__':
     path = "/home1/fsb/project/LPR/plate_dataset/license/冀J8MYR75.png"
     # path = "/home1/fsb/project/LPR/plate_dataset/license/粤D0G7V5X.png"
 
-
-
-    checkpoint_path = "./tmp/platenet/resized_checkpoints"
+    checkpoint_path = "../tmp/platenet/process_checkpoints"
     platenet_pre = plate_predict(
         checkpoint_path=checkpoint_path,
         device_id='')
+
     real_list = ['a2.jpg', 'a3.jpg', 'a4.jpg', 'a6.jpg', 'a7.jpg', 'a8.jpg', 'a9.jpg', 'a10.jpg',
                  'a11.jpg', 'a12.jpg', 'a13.jpg', 'a14.jpg', 'a15.jpg', 'a16.jpg']
+    real_list = ['22_a.bmp', '280_a.bmp', '558_a.bmp', '581_a.bmp', '698_a.bmp', '603_a.bmp', '608_a.bmp', '729_a.bmp', '745_a.bmp']
+    # real_list = ['22_a.jpg', '280_a.jpg', '558_a.jpg', '581_a.jpg', '698_a.jpg', '603_a.jpg', '608_a.jpg', '729_a.jpg', '745_a.jpg']
     for name in real_list:
-        path = os.path.join("/home1/fsb/project/LPR/plate_dataset/real_image/", name)
-
+        # path = os.path.join("/home1/fsb/project/LPR/plate_dataset/real_image/", name)
+        path = os.path.join("/home1/fsb/project/LPR/Plate-Recognition/test_plate", name)
+        print(path)
         result = platenet_pre.predict(path)
 
         label = np.argmax(result, axis=3)

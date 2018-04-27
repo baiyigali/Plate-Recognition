@@ -47,7 +47,7 @@ class plate_process():
         rand_xy = random.random()
         rand_s = random.random()
         if offset is None:
-            offset = random.randrange(int(-rows / 30.), int(rows / 10.))
+            offset = random.randrange(int(-rows / 20.), int(rows / 10.))
         size = (cols, rows)
         if rand_xy < 0.5:  # 沿x轴错切
             pts2 = np.float32(
@@ -205,9 +205,9 @@ class plate_process():
         return dst
 
     # 对焦模糊、高斯模糊
-    def _gauss_blur(self, image, degree=12):
+    def _gauss_blur(self, image, degree=None):
         if degree is None:
-            degree = random.randint(8, 12)
+            degree = random.randint(9, 11)
 
         return cv2.blur(image, (degree, degree))
 
@@ -249,7 +249,7 @@ class plate_process():
         height, width, _ = image.shape
         nums = np.random.random_integers(0, 3)  # 随机生成遮挡物的数量
         for i in range(nums):
-            size = np.random.random_integers(50, 100)  # 随机生成遮挡物尺寸
+            size = np.random.random_integers(20, 50)  # 随机生成遮挡物尺寸
             x = np.random.random_integers(0, width - size)  # 随机生成坐标
             y = np.random.random_integers(0, height - size)
             block = image[y:y + size, x:x + 2 * size, :]
@@ -287,7 +287,7 @@ class plate_process():
         back_ground = cv2.imread(os.path.join(PROJECT_PATH, "./image/car/") + np.random.choice(bg_pic, 1)[0])
         dst = cv2.resize(back_ground, (col, row))
         # dst = np.zeros_like(image)
-        scale = np.random.randint(9, 11) / 10.
+        scale = np.random.randint(95, 110) / 100.
         methods = [cv2.INTER_NEAREST, cv2.INTER_LINEAR, cv2.INTER_AREA,
                    cv2.INTER_CUBIC, cv2.INTER_LANCZOS4]
         pic = image
@@ -314,9 +314,9 @@ class plate_process():
 
     def _scale(self, image, dst_row=60):
         row, col, _ = image.shape
-        first_row = 20.
-        dst = cv2.resize(image, dsize=(int(first_row * col / row), int(first_row)))
-        dst = cv2.resize(dst, dsize=(int(dst_row * col / row), int(dst_row)))
+        # first_row = 30.
+        # image = cv2.resize(image, dsize=(int(first_row * col / row), int(first_row)))
+        dst = cv2.resize(image, dsize=(int(dst_row * col / row), int(dst_row)))
         return dst
 
     def _read_image(self, path):
@@ -341,7 +341,7 @@ class plate_process():
                                       is_shear_mapping=True,
                                       is_gauss_blur=True,
                                       is_gauss_noise=True,
-                                      is_add_white=True,
+                                      is_add_white=False,
                                       is_gamma_correction=False,
                                       is_move=True,
                                       is_scale=True):
@@ -350,7 +350,7 @@ class plate_process():
 
             if is_shear_mapping: image = self._shear_mapping2(image)
 
-            if is_gauss_blur: image = self._gauss_blur(image)
+            if is_gauss_blur: image = self._gauss_blur(image, 1)
 
             if is_gauss_noise: image = self._gauss_noise(image)
 
@@ -360,8 +360,8 @@ class plate_process():
             if is_gamma_correction: image = self._gamma_correction(image)
 
             if is_move: image = self._move(image)
-            if is_scale: image = self._scale(image)
-            image = cv2.resize(image, (100, 30)) #  to (100, 30)
+            if is_scale: image = self._scale(image, 30)
+            image = cv2.resize(image, (100, 30))  # to (100, 30)
 
         return image, coords
 
@@ -373,6 +373,7 @@ class plate_process():
 
 
 if __name__ == "__main__":
+    pass
     pp = plate_process()
     # image = pp._read_image('./云0B42KH.png')
     # # image = pp._change_light(image, 1.2)
@@ -389,15 +390,15 @@ if __name__ == "__main__":
     # pp._save_image(image, '1.png', './')
 
     # # batch process
+    # pp = plate_process()
     # folder = '../../plate_dataset_new/license'
     # save_folder = '../../plate_dataset_new/plate_image_resized'
-    #
     # names = os.listdir(folder)
     #
     #
     # def exec(name):
     #     range_list = []
-    #     for j in range(7):
+    #     for j in range(8):
     #         if random.random() < 0.5:
     #             range_list.append(True)
     #         else:
@@ -406,7 +407,7 @@ if __name__ == "__main__":
     #     path = os.path.join(folder, name)
     #     image = cv2.imread(path)
     #     image = pp.process_pic_with_shape_change(image, range_list[0], range_list[1], range_list[2], range_list[3],
-    #                                              range_list[4], range_list[5])
+    #                                              range_list[4], range_list[5], range_list[6], range_list[7])
     #     pp._save_image(image, name, save_folder)
     #     return path, range_list
     #

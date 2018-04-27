@@ -21,17 +21,20 @@ class plate_Net(object):
                                 weights_regularizer=slim.l2_regularizer(0.0005)):
                 net = self.images
                 net = slim.conv2d(inputs=net, num_outputs=32, kernel_size=3, stride=1, padding='VALID', scope='conv_1')
+                net = slim.batch_norm(inputs=net, is_training=True, scope='batch_1')
                 net = slim.max_pool2d(inputs=net, kernel_size=3, stride=2, padding='SAME', scope='pool_1')
                 net = slim.conv2d(inputs=net, num_outputs=64, kernel_size=3, stride=1, padding='VALID', scope='conv_2')
+                net = slim.batch_norm(inputs=net, is_training=True, scope='batch_2')
                 net = slim.max_pool2d(inputs=net, kernel_size=2, padding='SAME', scope='pool_2')
                 net = slim.conv2d(inputs=net, num_outputs=128, kernel_size=3, stride=1, padding='SAME', scope='conv_3')
+                net = slim.batch_norm(inputs=net, is_training=True, scope='batch_3')
                 net = slim.max_pool2d(inputs=net, kernel_size=2, padding='SAME', scope='pool_3')
                 net = slim.conv2d(inputs=net, num_outputs=256, kernel_size=3, stride=1, padding='VALID', scope='conv_4')
                 net = slim.conv2d(inputs=net, num_outputs=128, kernel_size=2, stride=1, padding='VALID', scope='conv_5')
                 net = slim.conv2d(inputs=net, num_outputs=self.num_classes, kernel_size=1, stride=1, padding='VALID', scope='conv_6')
                 net = slim.softmax(net, scope='output')
         return net
-
+    #
     def _leaky_relu(self, alpha):
         def op(inputs):
             return tf.maximum(alpha * inputs, inputs, name='leaky_relu')

@@ -20,24 +20,24 @@ class plate_Net(object):
         self.coord_scale = 5.
         pass
 
-    # input size [None, 96, 33, 3]
-    # output size [None, num_classes, 1, 8]
+    # input size [None, 31, 94, 3]
+    # output size [None, 560]
     def network_model(self, num_output=560, alpha=0.1, scope='fcn'):
         with tf.variable_scope(scope):
             with slim.arg_scope([slim.conv2d, slim.fully_connected], activation_fn=self._leaky_relu(alpha),
                                 weights_initializer=tf.truncated_normal_initializer(0.0, 0.01),
                                 weights_regularizer=slim.l2_regularizer(0.0005)):
                 net = self.images
-                net = slim.conv2d(inputs=net, num_outputs=32, kernel_size=3, stride=1, padding='VALID', scope='conv_1')
+                net = slim.conv2d(inputs=net, num_outputs=64, kernel_size=3, stride=1, padding='VALID', scope='conv_1')
                 net = slim.max_pool2d(inputs=net, kernel_size=3, stride=2, padding='SAME', scope='pool_1')
-                net = slim.conv2d(inputs=net, num_outputs=64, kernel_size=3, stride=1, padding='VALID', scope='conv_2')
+                net = slim.conv2d(inputs=net, num_outputs=128, kernel_size=3, stride=1, padding='VALID', scope='conv_2')
                 net = slim.max_pool2d(inputs=net, kernel_size=2, padding='SAME', scope='pool_2')
                 net = slim.conv2d(inputs=net, num_outputs=128, kernel_size=3, stride=1, padding='SAME', scope='conv_3')
                 net = slim.max_pool2d(inputs=net, kernel_size=2, padding='SAME', scope='pool_3')
-                net = slim.conv2d(inputs=net, num_outputs=256, kernel_size=3, stride=1, padding='VALID', scope='conv_4')
-                net = slim.conv2d(inputs=net, num_outputs=128, kernel_size=2, stride=1, padding='VALID', scope='conv_5')
+                net = slim.conv2d(inputs=net, num_outputs=256, kernel_size=3, stride=1, padding='SAME', scope='conv_4')
+                net = slim.conv2d(inputs=net, num_outputs=128, kernel_size=2, stride=1, padding='SAME', scope='conv_5')
                 net = slim.flatten(net, scope='flatten')
-                net = slim.fully_connected(net, 900, scope='fc_1')
+                net = slim.fully_connected(net, 2048, scope='fc_1')
                 net = slim.dropout(net, keep_prob=self.keep_prob, scope='dropout')
                 net = slim.fully_connected(net, num_output, scope='fc_2')
                 net = slim.softmax(net, scope='output')
@@ -51,22 +51,23 @@ class plate_Net(object):
         with tf.variable_scope(scope):
             pass
 
-
+    # @param: predicts [batch_size, self.out_put]
+    # @param: labels [batch_size, self.num_digit, self.num_classes]
     def loss(self, predicts, labels, scope='loss'):
         with tf.variable_scope(scope):
-            predict_confidence = tf.reshape(predicts[:self.boundary1],
+            predict_confidence = tf.reshape(predicts[:, :self.boundary1],
                                             [self.batch_size, self.cell_size[0], self.cell_size[1], self.box_per_cell])
-            predict_boxes = tf.reshape(predicts[self.boundary1:self.boundary2],
-                                     [self.batch_size, self.cell_size[0], self.cell_size[1], 4])
-            predict_classes = tf.reshape(predicts[self.boundary2:],
-                                       [self.batch_size, self.cell_size[0], self.cell_size[1], self.num_classes])
+            predict_boxes = tf.reshape(predicts[:, self.boundary1:self.boundary2],
+                                       [self.batch_size, self.cell_size[0], self.cell_size[1], 4])
+            predict_classes = tf.reshape(predicts[:, self.boundary2:],
+                                         [self.batch_size, self.cell_size[0], self.cell_size[1], self.num_classes])
 
-            labels_confidence = tf.reshape(labels[:, :, :, 0],
-                                            [self.batch_size, self.cell_size[0], self.cell_size[1], self.box_per_cell])
-            labels_boxes = tf.reshape(labels[:, :, :, 1:5],
-                                     [self.batch_size, self.cell_size[0], self.cell_size[1], 4])
-            labels_classes = tf.reshape(labels[:, :, :, 5:],
-                                       [self.batch_size, self.cell_size[0], self.cell_size[1], self.num_classes])
+            labels_confidence = tf.reshape(labels[:, :, 0],
+                                           [self.batch_size, self.cell_size[0], self.cell_size[1], self.box_per_cell])
+            labels_boxes = tf.reshape(labels[:, :, 1:5],
+                                      [self.batch_size, self.cell_size[0], self.cell_size[1], 4])
+            labels_classes = tf.reshape(labels[:, :, 5:],
+                                        [self.batch_size, self.cell_size[0], self.cell_size[1], self.num_classes])
 
             # object_loss
 
@@ -78,22 +79,24 @@ class plate_Net(object):
             class_delte = labels_confidence * (predict_classes - labels_classes)
             class_loss = tf.reduce_mean(tf.reduce_sum(tf.square(class_delte), axis=[1, 2, 3])) * self.classes_scale
 
-            tf.losses.add_loss(box_loss)
-            tf.losses.add_loss(class_loss)
+            # tf.losses.add_loss(box_loss)
+            # tf.losses.add_loss(class_loss)
 
             tf.summary.scalar('box_loss', box_loss)
             tf.summary.scalar('class_loss', class_loss)
 
+            # return tf.losses.get_total_loss()
+            return class_loss# + box_loss
+
     def class_accuracy(self, predicts, labels, scope='class_accuracy'):
-        predict_classes = tf.reshape(predicts[self.boundary2:],
+        predict_classes = tf.reshape(predicts[:, self.boundary2:],
                                      [self.batch_size, self.cell_size[0], self.cell_size[1], self.num_classes])
-        labels_classes = tf.reshape(labels[:, :, :, 5:],
+        labels_classes = tf.reshape(labels[:, :, 5:],
                                     [self.batch_size, self.cell_size[0], self.cell_size[1], self.num_classes])
         with tf.variable_scope(scope):
             prediction = tf.equal(tf.argmax(predict_classes, axis=3), tf.argmax(labels_classes, axis=3))
             prediction = tf.cast(prediction, tf.float32)
             accuracy = tf.reduce_mean(prediction, name='accuracy')
-            print(accuracy)
             tf.summary.scalar('accuracy', accuracy)
         return accuracy
 
