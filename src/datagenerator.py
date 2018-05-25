@@ -7,7 +7,7 @@ import data_process.read_xml as rx
 
 class ImageDataGenerator:
     def __init__(self, class_list, scale_size, horizontal_flip=False, shuffle=False,
-                 mean=np.array([112.5, 161.5, 106.5]), num_digit=8, num_classes=2):#mean=np.array([127.5]),np.array(,,)
+                 mean=np.array([112.5, 161.5, 106.5]), num_digit=8, num_classes=65):#mean=np.array([127.5]),np.array(,,)
 
         # Init params
         self.horizontal_flip = horizontal_flip

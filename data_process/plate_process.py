@@ -216,7 +216,7 @@ class plate_process():
         row, col, ch = image.shape
         mean = 0
         if degree is None:
-            degree = random.uniform(20, 60)
+            degree = random.uniform(20, 30)
 
         sigma = degree ** 0.5
         gauss = np.random.normal(mean, sigma, (row, col, ch))
@@ -274,14 +274,13 @@ class plate_process():
         return dst
 
     def _move(self, image):
-        x = np.random.randint(-10, 10)
-        y = np.random.randint(-10, 10)
+        x = np.random.randint(-3, 3)
+        y = np.random.randint(-4, 4)
         M = np.float32([[1, 0, x], [0, 1, y]])
         dst = cv2.warpAffine(image, M, (image.shape[1], image.shape[0]))
         return dst
 
-    def _zoom(self, image, coords):
-
+    def _zoom(self, image):
         row, col, _ = image.shape
         bg_pic = os.listdir(os.path.join(PROJECT_PATH, 'image/car'))
         back_ground = cv2.imread(os.path.join(PROJECT_PATH, "./image/car/") + np.random.choice(bg_pic, 1)[0])
@@ -304,18 +303,12 @@ class plate_process():
             y = int((new_col - col) / 2)
             dst = resized[x:x + row, y:y + col, :]
 
-        # 根据比例更改坐标系的值
-        if coords is not None:
-            for i, coord in enumerate(coords):
-                coord[0:2] = coord[0:2] * scale + (1 - scale) / 2
-                coord[2:4] = coord[2:4] * scale
-
-        return dst, coords
+        return dst
 
     def _scale(self, image, dst_row=60):
         row, col, _ = image.shape
-        # first_row = 30.
-        # image = cv2.resize(image, dsize=(int(first_row * col / row), int(first_row)))
+        first_row = 20.
+        image = cv2.resize(image, dsize=(int(first_row * col / row), int(first_row)))
         dst = cv2.resize(image, dsize=(int(dst_row * col / row), int(dst_row)))
         return dst
 
@@ -336,40 +329,27 @@ class plate_process():
         cv2.destroyAllWindows()
 
     def process_pic_with_shape_change(self, image,
-                                      coords=None,
                                       is_zoom=True,
                                       is_shear_mapping=True,
-                                      is_gauss_blur=True,
-                                      is_gauss_noise=True,
+                                      is_gauss_blur=False,
+                                      is_gauss_noise=False,
                                       is_add_white=False,
                                       is_gamma_correction=False,
                                       is_move=True,
-                                      is_scale=True):
+                                      is_scale=False):
         if image.shape is not None:
-            if is_zoom: image, coords = self._zoom(image, coords)
-
+            if is_zoom: image = self._zoom(image)
             if is_shear_mapping: image = self._shear_mapping2(image)
-
             if is_gauss_blur: image = self._gauss_blur(image, 1)
-
             if is_gauss_noise: image = self._gauss_noise(image)
-
             # if is_add_block: image = self.add_blocked(image)
             if is_add_white: image = self._add_color(image)
-
             if is_gamma_correction: image = self._gamma_correction(image)
-
             if is_move: image = self._move(image)
             if is_scale: image = self._scale(image, 30)
-            image = cv2.resize(image, (100, 30))  # to (100, 30)
+            # image = cv2.resize(image, (100, 30))  # to (100, 30)
 
-        return image, coords
-
-    # 对某个图像的区域进行扣取
-    # 2018.03.06 这个之后写
-    def crop_image(self, path, box=(0, 10, 10, 10)):
-        image = self._read_image(path)
-        pass
+        return image
 
 
 if __name__ == "__main__":
@@ -383,11 +363,11 @@ if __name__ == "__main__":
     # image = pp._zoom(image)
     # image = pp._scale(image)
     # pp._show_image(image)
-    path = './云0B42KH.png',
+    path = '云0B42KH.png',
     image = cv2.imread(path)
     image = pp.process_pic_with_shape_change(image)
     pp._show_image(image)
-    # pp._save_image(image, '1.png', './')
+    pp._save_image(image, '2.png', './')
 
     # # batch process
     # pp = plate_process()

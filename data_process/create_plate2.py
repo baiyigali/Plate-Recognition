@@ -1,11 +1,12 @@
 # encoding=utf-8
-import os, cv2
+import os, sys, cv2, time
 import numpy as np
 import concurrent.futures
 from PIL import Image
 import data_process.label as data_label
 from data_process import plate_process
 import tensorflow as tf
+
 
 CLASS_DICT = data_label.class_dict
 CLASS_CHAR = data_label.class_char
@@ -16,6 +17,8 @@ bg_path = ['image/base_bg1.jpg', 'image/base_bg2.jpg', 'image/base_bg3.jpg',
            'image/base_bg7.jpg', 'image/base_bg8.jpg', 'image/base_bg9.jpg',
            'image/base_bg10.jpg', 'image/base_bg11.jpg', 'image/base_bg12.jpg',
            'image/base_bg14.jpg', 'image/base_bg13.jpg']
+
+bg_path = ['image/dst.png']
 
 X_coord = 20
 Y_coord = 32
@@ -45,7 +48,7 @@ class plate():
         serial.append(np.random.randint(41, 64))
         serial.append(np.random.choice([44, 46]))
         for i in range(5):
-            serial.append(np.random.randint(31, 64))
+            serial.append(np.random.randint(31, 40))
         return serial
 
     # 给定序列 背景图片生成车牌
@@ -60,7 +63,7 @@ class plate():
                                                 CHAR_COORD[i]['x'],
                                                 CHAR_COORD[i]['y'])
             coords[i] = np.array([x, y, w, h])
-        return background, coords
+        return background
 
     def __gray_image(self, image):
         image = image * 0.7 + 100
@@ -78,9 +81,12 @@ class plate():
         #     print("融合图像边界溢出")
         roi = background[y:y + rows, x:x + cols]
         gray = cv2.cvtColor(logo, cv2.COLOR_RGB2GRAY)
-
+        # TODO erode
+        element1 = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 1))
+        dilation = cv2.erode(gray, element1, iterations=1)
+        # dilation = cv2.dilate(dilation, element1, iterations=1)
         # 设定阈值 小于thresh的置0， 大于thresh的置maxval
-        ret, mask = cv2.threshold(gray, thresh=120, maxval=255, type=cv2.THRESH_BINARY)
+        ret, mask = cv2.threshold(dilation, thresh=120, maxval=255, type=cv2.THRESH_BINARY)
         # print(logo.shape, roi.shape, mask.shape)
         fusion = cv2.bitwise_and(roi, roi, mask=mask)
         # fusion = self.__gray_image(fusion)
@@ -132,69 +138,108 @@ if __name__ == "__main__":
     # #
     serial = plate.create_random_serial()
     # # print(serial)
-    serial = [19, 42, 46, 32, 32, 40, 37, 37]
-    plate_image, coords = plate.create_plate(serial)
+    # serial = [19, 42, 46, 32, 32, 40, 37, 37]
+    plate_image = plate.create_plate(serial)
     # plate.imshow(plate_image)
-    plate_image, coords = process.process_pic_with_shape_change(plate_image, coords)
+    plate_image = process.process_pic_with_shape_change(plate_image)
     # plate.draw_box(plate_image, coords)
     plate.imshow(plate_image)
 
-    # # ====batch create plate===
-    # save_folder = '../../plate_dataset_new/records_without_block'
+
+    # # ======[START] create plate save in disk =====
+    # process = plate_process.plate_process()
+    # plate = plate()
+    # save_folder = "../../plate_dataset_new/video_pic"
     # if not os.path.exists(save_folder):
     #     os.makedirs(save_folder)
     #
-    # plate = plate()
-    # process = plate_process.plate_process()
-    #
+    # t1 = time.time()
+    # create_num = 200000
     # serial_list = []
-    # for i in range(200000):
-    #     serial_list.append(plate.create_random_serial())
-    #
+    # for i in range(create_num):
+    #     serial = plate.create_random_serial()
+    #     print(i, serial)
+    #     serial_list.append(serial)
     #
     # def main(serial):
     #     plate_image, coords = plate.create_plate(serial)
     #     plate_image, coords = process.process_pic_with_shape_change(plate_image, coords)
-    #     # name = plate.serial2str(serial)
-    #     # image_path = os.path.join(save_folder, name)
-    #     labels = np.array(serial)
-    #     info_dict = {
-    #         'coords': coords,
-    #         # 'image_path': image_path,
-    #         'labels': labels,
-    #     }
-    #     return plate_image, info_dict
-    #     # plate.imshow(plate_image)
+    #     name = plate.serial2str(serial)
+    #     save_path = os.path.join(save_folder, name)
+    #     # print(name)
+    #     # TODO save pic
+    #     cv2.imwrite(save_path, plate_image)
     #
-    #
-    # record_file_num = 0
-    # train_file_num = 0
-    # valid_file_num = 0
     # with concurrent.futures.ThreadPoolExecutor(max_workers=80) as executor:
-    #     for i, (image, info_dict) in enumerate(executor.map(main, serial_list)):
-    #         if i % 1000 == 0:
-    #             if i < 170000:
-    #                 file_name = ('train.tfrecords-plate-%.4d' % (record_file_num))
-    #                 writer = tf.python_io.TFRecordWriter(os.path.join(save_folder, file_name))
-    #             else:
-    #                 file_name = ('valid.tfrecords-plate-%.4d' % (record_file_num))
-    #                 writer = tf.python_io.TFRecordWriter(os.path.join(save_folder, file_name))
-    #             record_file_num += 1
-    #         image_raw = image.tobytes()
-    #         coords = info_dict['coords']
-    #         labels = info_dict['labels']
-    #         coords_raw = coords.tobytes()
-    #         labels_raw = labels.tobytes()
-    #         example = tf.train.Example(
-    #             features=tf.train.Features(
-    #                 feature={
-    #                     'image_raw': tf.train.Feature(bytes_list=tf.train.BytesList(value=[image_raw])),
-    #                     'coords': tf.train.Feature(bytes_list=tf.train.BytesList(value=[coords_raw])),
-    #                     'labels': tf.train.Feature(bytes_list=tf.train.BytesList(value=[labels_raw]))
-    #                 }
-    #             )
-    #         )
-    #         # print(type(image), type(image[0][0][0]), image.shape, type(coords[1][0]))
+    #     for i, serial in enumerate(executor.map(main, serial_list)):
     #         print(i)
-    #         writer.write(example.SerializeToString())
-    #     writer.close()
+    #
+    # # ======[END] create plate save in disk =====
+
+    sys.exit()
+
+    # ====[START] create batch plate in record====
+    save_folder = '../../plate_dataset_new/records_resized_15'
+    create_num = 200000
+    train_num = 170000
+    t1 = time.time()
+    if not os.path.exists(save_folder):
+        os.makedirs(save_folder)
+
+    plate = plate()
+    process = plate_process.plate_process()
+
+    serial_list = []
+    for i in range(create_num):
+        serial_list.append(plate.create_random_serial())
+
+
+    def main(serial):
+        plate_image, coords = plate.create_plate(serial)
+        plate_image, coords = process.process_pic_with_shape_change(plate_image, coords)
+        # name = plate.serial2str(serial)
+        # image_path = os.path.join(save_folder, name)
+        labels = np.array(serial)
+        info_dict = {
+            'coords': coords,
+            # 'image_path': image_path,
+            'labels': labels,
+        }
+        return plate_image, info_dict
+        # plate.imshow(plate_image)
+
+
+    record_file_num = 0
+    train_file_num = 0
+    valid_file_num = 0
+    with concurrent.futures.ThreadPoolExecutor(max_workers=80) as executor:
+        for i, (image, info_dict) in enumerate(executor.map(main, serial_list)):
+            if i % 1000 == 0:
+                if i < train_num:
+                    file_name = ('train.tfrecords-plate-%.4d' % (record_file_num))
+                    writer = tf.python_io.TFRecordWriter(os.path.join(save_folder, file_name))
+                else:
+                    file_name = ('valid.tfrecords-plate-%.4d' % (record_file_num))
+                    writer = tf.python_io.TFRecordWriter(os.path.join(save_folder, file_name))
+                record_file_num += 1
+            image_raw = image.tobytes()
+            coords = info_dict['coords']
+            labels = info_dict['labels']
+            coords_raw = coords.tobytes()
+            labels_raw = labels.tobytes()
+            example = tf.train.Example(
+                features=tf.train.Features(
+                    feature={
+                        'image_raw': tf.train.Feature(bytes_list=tf.train.BytesList(value=[image_raw])),
+                        'coords': tf.train.Feature(bytes_list=tf.train.BytesList(value=[coords_raw])),
+                        'labels': tf.train.Feature(bytes_list=tf.train.BytesList(value=[labels_raw]))
+                    }
+                )
+            )
+            # print(type(image), type(image[0][0][0]), image.shape, type(coords[1][0]))
+            print(i)
+            writer.write(example.SerializeToString())
+        writer.close()
+
+    print("cost time {}".format(time.time() - t1))
+    # ====[END] create batch plate in record====

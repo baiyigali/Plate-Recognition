@@ -79,13 +79,14 @@ class write_label_file():
 
 
 if __name__ == "__main__":
-    folder_path = '../../plate_dataset_new/plate_image_resized'
+    folder_path = '../../plate_dataset_new/crop_plate'
     # folder_path = '../../plate_dataset/plate_process_image_with_blockmove'
     # # folder_path = '../../plate_dataset/plate_process_image_without_shape'
     # # folder_path = '../../plate_dataset/plate_process_image_with_shear'
     # folder_path = '../../plate_dataset_new/license'
     # #
-    txt_path = '../path/resized_image'
+
+    txt_path = '../path/crop_image'
     if not os.path.exists(txt_path):
         os.makedirs(txt_path)
     train_txt = os.path.join(txt_path, 'train.txt')
